@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Témoignages MFINANCES • Votre avis compte et inspire d'autres
+      entrepreneurs
+    </title>
+    <meta
+      name="description"
+      content="Partagez votre expérience avec MFINANCES. Témoignages texte, audio ou vidéo pour aider d'autres entrepreneurs à nous découvrir avec confiance."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container">
+        <a class="brand" href="#" aria-label="MFINANCES – Accueil">
+          <img src="./MSL ITECH.png" alt="MFINANCES" class="brand-logo" />
+          <span class="brand-text">MFINANCES</span>
+        </a>
+        <div class="nav-cta">
+          <a class="btn btn-accent" href="#testimonial-form">Témoigner</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Section Hero avec titre et introduction -->
+      <section class="hero testimonials-hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <h1 class="hero-title testimonials-title">
+              Votre avis compte et inspire d'autres entrepreneurs
+            </h1>
+            <div class="hero-divider">⸻</div>
+            <p class="hero-subtitle testimonials-intro">
+              Chez MFINANCES, chaque client est unique. Votre confiance est
+              notre plus grande fierté et vos retours nous aident à grandir et à
+              offrir un accompagnement toujours plus proche de vos besoins.
+            </p>
+            <div class="video-intro">
+              <p class="video-label">
+                🎥 Découvrez notre message en vidéo ci-dessous :
+              </p>
+            </div>
+          </div>
+          <div class="hero-media testimonials-video">
+            <div class="video-frame">
+              <iframe
+                id="testimonials-video"
+                width="1206"
+                height="678"
+                src="https://www.youtube.com/embed/JQ8RE5uE7To"
+                title="Message MFINANCES - Témoignages"
+                frameborder="0"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Inviter à témoigner -->
+      <section
+        class="section testimonial-invitation"
+        id="testimonial-invitation"
+        style="display: none"
+      >
+        <div class="container">
+          <div class="invitation-content">
+            <h2 class="section-title invitation-title">
+              Partagez votre expérience, à votre manière
+            </h2>
+            <div class="testimonial-methods">
+              <div class="method-card text-method" data-method="text">
+                <div class="method-icon">
+                  <i class="bi bi-pencil-square"></i>
+                </div>
+                <h3 class="method-title">✍️ Message écrit</h3>
+                <p class="method-description">
+                  Écrire un court message pour partager votre ressenti et votre
+                  expérience avec MFINANCES.
+                </p>
+              </div>
+
+              <div class="method-card audio-method" data-method="audio">
+                <div class="method-icon">
+                  <i class="bi bi-mic"></i>
+                </div>
+                <h3 class="method-title">🎙️ Message vocal</h3>
+                <p class="method-description">
+                  Enregistrer un message vocal directement depuis votre
+                  smartphone ou ordinateur.
+                </p>
+              </div>
+
+              <div class="method-card video-method" data-method="video">
+                <div class="method-icon">
+                  <i class="bi bi-camera-video"></i>
+                </div>
+                <h3 class="method-title">🎥 Témoignage vidéo</h3>
+                <p class="method-description">
+                  Poster une vidéo pour donner un visage et une voix à votre
+                  témoignage.
+                </p>
+              </div>
+            </div>
+
+            <p class="testimonial-note">
+              Chaque retour, même bref, est précieux et aide d'autres
+              entrepreneurs à nous découvrir avec confiance.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Formulaire de témoignage -->
+      <section
+        id="testimonial-form"
+        class="section testimonial-form-section"
+        style="display: none"
+      >
+        <div class="container">
+          <div class="testimonial-form-container">
+            <div class="form-header">
+              <h2 class="form-title">Créer votre témoignage</h2>
+              <p class="form-subtitle">
+                Sélectionnez votre méthode préférée pour témoigner
+              </p>
+            </div>
+
+            <div class="testimonial-tabs">
+              <button class="tab-button active" data-tab="text">
+                <i class="bi bi-pencil-square"></i>
+                <span>Texte</span>
+              </button>
+              <button class="tab-button" data-tab="audio">
+                <i class="bi bi-mic"></i>
+                <span>Audio</span>
+              </button>
+              <button class="tab-button" data-tab="video">
+                <i class="bi bi-camera-video"></i>
+                <span>Vidéo</span>
+              </button>
+            </div>
+
+            <form class="testimonial-form" id="testimonialForm" novalidate>
+              <!-- Informations de base -->
+              <div class="form-section basic-info">
+                <h3 class="section-subtitle">Vos informations</h3>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="clientName"
+                      >Nom complet <span class="required">*</span></label
+                    >
+                    <input
+                      id="clientName"
+                      name="clientName"
+                      type="text"
+                      placeholder="Ex: Marie Dupont"
+                      required
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label for="clientCompany">Entreprise</label>
+                    <input
+                      id="clientCompany"
+                      name="clientCompany"
+                      type="text"
+                      placeholder="Ex: Ma Société SARL"
+                    />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="clientEmail"
+                      >E-mail <span class="required">*</span></label
+                    >
+                    <input
+                      id="clientEmail"
+                      name="clientEmail"
+                      type="email"
+                      placeholder="vous@entreprise.com"
+                      required
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label for="clientPhone">Téléphone (optionnel)</label>
+                    <input
+                      id="clientPhone"
+                      name="clientPhone"
+                      type="tel"
+                      placeholder="06 12 34 56 78"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Témoignage texte -->
+              <div
+                class="form-section testimonial-content active"
+                id="text-content"
+              >
+                <h3 class="section-subtitle">Votre témoignage</h3>
+                <div class="form-field">
+                  <label for="testimonialText"
+                    >Partagez votre expérience avec MFINANCES
+                    <span class="required">*</span></label
+                  >
+                  <textarea
+                    id="testimonialText"
+                    name="testimonialText"
+                    rows="6"
+                    placeholder="Décrivez votre expérience, ce qui vous a plu, les résultats obtenus..."
+                    required
+                  ></textarea>
+                  <div class="char-counter">
+                    <span id="charCount">0</span>/500 caractères
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label for="testimonialRating">Note d'évaluation</label>
+                  <div class="rating-container">
+                    <div class="stars" id="starRating">
+                      <span class="star" data-rating="1">★</span>
+                      <span class="star" data-rating="2">★</span>
+                      <span class="star" data-rating="3">★</span>
+                      <span class="star" data-rating="4">★</span>
+                      <span class="star" data-rating="5">★</span>
+                    </div>
+                    <span class="rating-text">Cliquez sur les étoiles</span>
+                  </div>
+                  <input
+                    type="hidden"
+                    id="testimonialRating"
+                    name="testimonialRating"
+                  />
+                </div>
+              </div>
+
+              <!-- Témoignage audio -->
+              <div class="form-section testimonial-content" id="audio-content">
+                <h3 class="section-subtitle">Témoignage vocal</h3>
+
+                <!-- Méthodes d'ajout audio -->
+                <div class="audio-methods">
+                  <div class="method-toggle">
+                    <button
+                      type="button"
+                      class="toggle-btn active"
+                      data-method="record"
+                    >
+                      <i class="bi bi-mic"></i>
+                      Enregistrer
+                    </button>
+                    <button
+                      type="button"
+                      class="toggle-btn"
+                      data-method="upload"
+                    >
+                      <i class="bi bi-upload"></i>
+                      Importer
+                    </button>
+                  </div>
+
+                  <!-- Enregistrement audio -->
+                  <div
+                    class="audio-recorder method-content active"
+                    id="audio-record"
+                  >
+                    <div class="recorder-controls">
+                      <button type="button" class="record-btn" id="recordBtn">
+                        <i class="bi bi-mic"></i>
+                        <span>Commencer l'enregistrement</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="stop-btn"
+                        id="stopBtn"
+                        disabled
+                      >
+                        <i class="bi bi-stop-circle"></i>
+                        <span>Arrêter</span>
+                      </button>
+                    </div>
+                    <div class="recording-status" id="recordingStatus">
+                      <div class="status-indicator"></div>
+                      <span class="status-text">Prêt à enregistrer</span>
+                      <span class="recording-time" id="recordingTime"
+                        >00:00</span
+                      >
+                    </div>
+                    <div
+                      class="audio-player"
+                      id="audioPlayer"
+                      style="display: none"
+                    >
+                      <audio controls id="audioPlayback"></audio>
+                      <div class="audio-actions">
+                        <button
+                          type="button"
+                          class="btn-secondary"
+                          id="reRecordBtn"
+                        >
+                          <i class="bi bi-arrow-clockwise"></i>
+                          Réenregistrer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Import audio -->
+                  <div class="audio-upload method-content" id="audio-upload">
+                    <div class="upload-zone" id="audioUploadZone">
+                      <div class="upload-content">
+                        <i class="bi bi-cloud-upload upload-icon"></i>
+                        <h4>Importer un fichier audio</h4>
+                        <p>
+                          Glissez-déposez votre fichier audio ici ou cliquez
+                          pour parcourir
+                        </p>
+                        <p class="file-formats">
+                          Formats acceptés : MP3, WAV, M4A (max 50MB)
+                        </p>
+                        <input
+                          type="file"
+                          id="audioFileInput"
+                          accept="audio/*"
+                          hidden
+                        />
+                        <button
+                          type="button"
+                          class="btn-upload"
+                          onclick="document.getElementById('audioFileInput').click()"
+                        >
+                          <i class="bi bi-folder-plus"></i>
+                          Choisir un fichier
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="uploaded-audio"
+                      id="uploadedAudio"
+                      style="display: none"
+                    >
+                      <audio controls id="uploadedAudioPlayer"></audio>
+                      <div class="file-info">
+                        <span class="file-name" id="audioFileName"></span>
+                        <button
+                          type="button"
+                          class="btn-remove"
+                          id="removeAudioBtn"
+                        >
+                          <i class="bi bi-trash"></i>
+                          Supprimer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Note d'évaluation pour audio -->
+                <div class="form-field">
+                  <label for="audioRating">Note d'évaluation</label>
+                  <div class="rating-container">
+                    <div class="stars" id="audioStarRating">
+                      <span class="star" data-rating="1">★</span>
+                      <span class="star" data-rating="2">★</span>
+                      <span class="star" data-rating="3">★</span>
+                      <span class="star" data-rating="4">★</span>
+                      <span class="star" data-rating="5">★</span>
+                    </div>
+                    <span class="rating-text">Cliquez sur les étoiles</span>
+                  </div>
+                  <input type="hidden" id="audioRating" name="audioRating" />
+                </div>
+              </div>
+
+              <!-- Témoignage vidéo -->
+              <div class="form-section testimonial-content" id="video-content">
+                <h3 class="section-subtitle">Témoignage vidéo</h3>
+
+                <!-- Méthodes d'ajout vidéo -->
+                <div class="video-methods">
+                  <div class="method-toggle">
+                    <button
+                      type="button"
+                      class="toggle-btn active"
+                      data-method="record"
+                    >
+                      <i class="bi bi-camera-video"></i>
+                      Enregistrer
+                    </button>
+                    <button
+                      type="button"
+                      class="toggle-btn"
+                      data-method="upload"
+                    >
+                      <i class="bi bi-upload"></i>
+                      Importer
+                    </button>
+                  </div>
+
+                  <!-- Enregistrement vidéo -->
+                  <div
+                    class="video-recorder method-content active"
+                    id="video-record"
+                  >
+                    <div class="video-preview">
+                      <video id="videoPreview" muted></video>
+                      <div class="video-placeholder" id="videoPlaceholder">
+                        <i class="bi bi-camera-video"></i>
+                        <p>
+                          Cliquez sur "Commencer" pour démarrer l'enregistrement
+                        </p>
+                      </div>
+                    </div>
+                    <div class="recorder-controls">
+                      <button
+                        type="button"
+                        class="record-btn"
+                        id="videoRecordBtn"
+                      >
+                        <i class="bi bi-camera-video"></i>
+                        <span>Commencer l'enregistrement</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="stop-btn"
+                        id="videoStopBtn"
+                        disabled
+                      >
+                        <i class="bi bi-stop-circle"></i>
+                        <span>Arrêter</span>
+                      </button>
+                    </div>
+                    <div class="recording-status" id="videoRecordingStatus">
+                      <div class="status-indicator"></div>
+                      <span class="status-text">Prêt à enregistrer</span>
+                      <span class="recording-time" id="videoRecordingTime"
+                        >00:00</span
+                      >
+                    </div>
+                    <div
+                      class="video-player"
+                      id="videoPlayer"
+                      style="display: none"
+                    >
+                      <video controls id="videoPlayback"></video>
+                      <div class="video-actions">
+                        <button
+                          type="button"
+                          class="btn-secondary"
+                          id="reRecordVideoBtn"
+                        >
+                          <i class="bi bi-arrow-clockwise"></i>
+                          Réenregistrer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Import vidéo -->
+                  <div class="video-upload method-content" id="video-upload">
+                    <div class="upload-zone" id="videoUploadZone">
+                      <div class="upload-content">
+                        <i class="bi bi-cloud-upload upload-icon"></i>
+                        <h4>Importer un fichier vidéo</h4>
+                        <p>
+                          Glissez-déposez votre fichier vidéo ici ou cliquez
+                          pour parcourir
+                        </p>
+                        <p class="file-formats">
+                          Formats acceptés : MP4, MOV, AVI, WEBM (max 100MB)
+                        </p>
+                        <input
+                          type="file"
+                          id="videoFileInput"
+                          accept="video/*"
+                          hidden
+                        />
+                        <button
+                          type="button"
+                          class="btn-upload"
+                          onclick="document.getElementById('videoFileInput').click()"
+                        >
+                          <i class="bi bi-folder-plus"></i>
+                          Choisir un fichier
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="uploaded-video"
+                      id="uploadedVideo"
+                      style="display: none"
+                    >
+                      <video controls id="uploadedVideoPlayer"></video>
+                      <div class="file-info">
+                        <span class="file-name" id="videoFileName"></span>
+                        <button
+                          type="button"
+                          class="btn-remove"
+                          id="removeVideoBtn"
+                        >
+                          <i class="bi bi-trash"></i>
+                          Supprimer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Note d'évaluation pour vidéo -->
+                <div class="form-field">
+                  <label for="videoRating">Note d'évaluation</label>
+                  <div class="rating-container">
+                    <div class="stars" id="videoStarRating">
+                      <span class="star" data-rating="1">★</span>
+                      <span class="star" data-rating="2">★</span>
+                      <span class="star" data-rating="3">★</span>
+                      <span class="star" data-rating="4">★</span>
+                      <span class="star" data-rating="5">★</span>
+                    </div>
+                    <span class="rating-text">Cliquez sur les étoiles</span>
+                  </div>
+                  <input type="hidden" id="videoRating" name="videoRating" />
+                </div>
+              </div>
+
+              <!-- Permissions et consentement -->
+              <div class="form-section permissions">
+                <h3 class="section-subtitle">Autorisation de publication</h3>
+                <div class="consent-options">
+                  <label class="consent-item">
+                    <input
+                      type="checkbox"
+                      name="allowWebsite"
+                      id="allowWebsite"
+                    />
+                    <div class="checkbox-custom"></div>
+                    <div class="consent-content">
+                      <strong>Publication sur notre site web</strong>
+                      <span
+                        >J'autorise la publication de mon témoignage sur le site
+                        MFINANCES</span
+                      >
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button
+                  type="submit"
+                  class="btn btn-accent btn-xl testimonial-submit"
+                >
+                  <i class="bi bi-send"></i>
+                  Envoyer mon témoignage
+                </button>
+              </div>
+
+              <p class="privacy-note">
+                🔒 Vos données sont en sécurité. Nous respectons votre vie
+                privée. Votre témoignage ne sera publié qu'avec votre
+                autorisation explicite.
+              </p>
+              <p class="form-feedback" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Pourquoi vos avis comptent -->
+      <section class="section impact-section">
+        <div class="container">
+          <h2 class="section-title impact-title">Pourquoi vos avis comptent</h2>
+          <p class="impact-subtitle">
+            Votre témoignage a un impact réel sur notre communauté
+            d'entrepreneurs
+          </p>
+
+          <div class="impact-grid">
+            <div class="impact-card">
+              <div class="impact-number">95%</div>
+              <h3>Taux de satisfaction</h3>
+              <p>
+                de nos clients nous recommandent à leurs collègues entrepreneurs
+              </p>
+            </div>
+
+            <div class="impact-card">
+              <div class="impact-number">2,500+</div>
+              <h3>Entreprises accompagnées</h3>
+              <p>ont fait confiance à MFINANCES pour leur gestion comptable</p>
+            </div>
+
+            <div class="impact-card">
+              <div class="impact-number">15</div>
+              <h3>Années d'expertise</h3>
+              <p>au service des entrepreneurs marocains et de leur réussite</p>
+            </div>
+
+            <div class="impact-card">
+              <div class="impact-number">48h</div>
+              <h3>Délai moyen</h3>
+              <p>pour traiter vos demandes et répondre à vos questions</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Témoignages exemples -->
+      <section class="section examples-section">
+        <div class="container">
+          <h2 class="section-title">Ils nous ont déjà fait confiance</h2>
+          <p class="examples-subtitle">
+            Découvrez les retours authentiques de nos clients
+          </p>
+
+          <div class="testimonials-examples">
+            <div class="example-testimonial">
+              <div class="testimonial-header">
+                <div class="client-avatar">
+                  <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="client-info">
+                  <h4>Fatima El Mansouri</h4>
+                  <span class="client-company"
+                    >Directrice, Boutique Fashion Rabat</span
+                  >
+                  <div class="client-rating">
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                  </div>
+                </div>
+              </div>
+              <blockquote>
+                "MFINANCES a transformé la gestion de ma boutique. Fini les
+                nuits blanches à faire la comptabilité ! Leur équipe est
+                réactive et comprend parfaitement les défis des commerçants."
+              </blockquote>
+            </div>
+
+            <div class="example-testimonial">
+              <div class="testimonial-header">
+                <div class="client-avatar">
+                  <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="client-info">
+                  <h4>Ahmed Benali</h4>
+                  <span class="client-company"
+                    >Fondateur, Tech Solutions Maroc</span
+                  >
+                  <div class="client-rating">
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                  </div>
+                </div>
+              </div>
+              <blockquote>
+                "En tant que startup, j'avais besoin d'un expert-comptable qui
+                comprend les enjeux du digital. MFINANCES m'accompagne
+                parfaitement dans ma croissance."
+              </blockquote>
+            </div>
+
+            <div class="example-testimonial">
+              <div class="testimonial-header">
+                <div class="client-avatar">
+                  <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="client-info">
+                  <h4>Khadija Alaoui</h4>
+                  <span class="client-company"
+                    >Gérante, Restaurant Le Jardin</span
+                  >
+                  <div class="client-rating">
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                    <span class="star selected">★</span>
+                  </div>
+                </div>
+              </div>
+              <blockquote>
+                "Service exceptionnel ! L'équipe m'a aidée à optimiser ma
+                gestion fiscale et j'ai économisé des milliers de dirhams. Je
+                recommande vivement."
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Choix de la méthode de témoignage -->
+      <section class="section testimonial-choice">
+        <div class="container">
+          <div class="choice-content">
+            <div class="actions-divider">⸻</div>
+            <h2 class="section-title choice-title">
+              Comment souhaitez-vous témoigner ?
+            </h2>
+            <p class="choice-description">
+              Choisissez la méthode qui vous convient le mieux
+            </p>
+
+            <div class="choice-grid">
+              <button class="choice-btn website-choice" id="websiteChoice">
+                <div class="btn-icon">
+                  <i class="bi bi-globe"></i>
+                </div>
+                <div class="btn-content">
+                  <h3 class="btn-title">Témoigner sur notre site</h3>
+                  <p class="btn-description">
+                    Partagez votre expérience avec texte, audio ou vidéo
+                  </p>
+                </div>
+                <i class="bi bi-arrow-right btn-arrow"></i>
+              </button>
+
+              <a
+                href="https://www.google.com/search?sca_esv=bd4826c8ba41a3de&sxsrf=AE3TifM3-FaoUqMNelL-lPkK2eH0t4T5uA:1756115093965&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EwY9wN49Ss6yAYNaMVwXLLnhCVrZfroQSEJ8Ic37tSPE45TmTK8NHm43mqXIGNlV9QOzePtNz3cqX83iRtIaiObLoZxVw1-lVXBh3mapUAuTKAMIXg%3D%3D&q=MFinances+%7C+Expert-Comptable+Avis&sa=X&ved=2ahUKEwie7_DC1qWPAxW1RKQEHcxVAFsQ0bkNegQIHhAE&biw=1680&bih=928&dpr=2#lrd=0x47c3c5d9d41dc777:0x4287de38397fa316,3,,,,"
+                target="_blank"
+                rel="noopener"
+                class="choice-btn google-choice"
+              >
+                <div class="btn-icon google-icon">
+                  <i class="bi bi-google"></i>
+                </div>
+                <div class="btn-content">
+                  <h3 class="btn-title">Avis Google My Business</h3>
+                  <p class="btn-description">
+                    Laissez un avis directement sur notre page Google
+                  </p>
+                </div>
+                <i class="bi bi-arrow-up-right btn-arrow"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Garanties et confiance -->
+      <section class="section trust-section">
+        <div class="container">
+          <h2 class="section-title">Nos engagements envers vous</h2>
+
+          <div class="trust-grid">
+            <div class="trust-item">
+              <div class="trust-icon-wrapper">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <h3>Confidentialité totale</h3>
+              <p>
+                Vos informations personnelles et financières sont protégées par
+                le secret professionnel
+              </p>
+            </div>
+
+            <div class="trust-item">
+              <div class="trust-icon-wrapper">
+                <i class="bi bi-clock-history"></i>
+              </div>
+              <h3>Réactivité garantie</h3>
+              <p>
+                Réponse sous 24h pour vos questions et traitement sous 48h pour
+                vos témoignages
+              </p>
+            </div>
+
+            <div class="trust-item">
+              <div class="trust-icon-wrapper">
+                <i class="bi bi-award"></i>
+              </div>
+              <h3>Expertise certifiée</h3>
+              <p>
+                Expert-comptable diplômé et inscrit à l'Ordre des
+                Experts-Comptables du Maroc
+              </p>
+            </div>
+
+            <div class="trust-item">
+              <div class="trust-icon-wrapper">
+                <i class="bi bi-heart"></i>
+              </div>
+              <h3>Accompagnement humain</h3>
+              <p>
+                Une relation de proximité et de confiance avec votre conseiller
+                dédié
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Message de clôture -->
+      <section class="section closing-message">
+        <div class="container">
+          <div class="closing-content">
+            <div class="thank-you-card">
+              <div class="thank-you-icon">🙏</div>
+              <h2 class="thank-you-title">
+                Un grand merci pour le temps que vous prenez
+              </h2>
+              <p class="thank-you-text">
+                Vos mots, votre voix ou votre sourire font partie de l'histoire
+                de MFINANCES et inspireront d'autres dirigeants à franchir le
+                pas pour avancer sereinement dans leur gestion financière.
+              </p>
+              <div class="decorative-line"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <a class="brand" href="#" aria-label="MFINANCES – Accueil">
+          <img src="./Logo-MSL2.png" alt="MFINANCES" class="brand-logo" />
+          <span class="brand-text">MFINANCES</span>
+        </a>
+        <div class="footer-contact">
+          <p class="footer-title">Besoin d'en savoir plus ?</p>
+          <p style="color: #fff">
+            Contactez‑nous :
+            <a class="link" href="mailto:team@mfinances.com"
+              >team@mfinances.com</a
+            >
+          </p>
+        </div>
+      </div>
+      <div class="legal">
+        © <span id="year"></span> MFINANCES. Tous droits réservés.
+      </div>
+    </footer>
+
+    <script src="./testimonials.js" defer></script>
+  </body>
+</html>

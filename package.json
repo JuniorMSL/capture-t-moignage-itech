@@ -1,0 +1,26 @@
+{
+  "name": "capture-video-conseil",
+  "version": "1.0.0",
+  "description": "Page de capture de témoignages avec intégration Supabase",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "vercel build",
+    "deploy": "vercel --prod",
+    "check-env": "node scripts/check-env.js",
+    "predev": "npm run check-env"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  },
+  "keywords": [
+    "testimonials",
+    "supabase",
+    "vercel"
+  ],
+  "author": "MFINANCES",
+  "license": "ISC"
+}
