@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       audioFileUrl,
       videoFileUrl,
       allowWebsite,
-      testimonialType = "text", // text, audio, video
+      testimonialType = "text",
     } = req.body;
 
     // Validation des champs obligatoires
