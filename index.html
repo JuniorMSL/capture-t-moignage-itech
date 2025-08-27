@@ -42,37 +42,153 @@
     <main>
       <!-- Section Hero avec titre et introduction -->
       <section class="hero testimonials-hero">
-        <div class="container hero-grid">
-          <div class="hero-copy">
-            <h1 class="hero-title testimonials-title">
-              Votre avis compte et inspire d'autres entrepreneurs
-            </h1>
-            <div class="hero-divider">⸻</div>
-            <p class="hero-subtitle testimonials-intro">
-              Chez MFINANCES, chaque client est unique. Votre confiance est
-              notre plus grande fierté et vos retours nous aident à grandir et à
-              offrir un accompagnement toujours plus proche de vos besoins.
-            </p>
-            <div class="video-intro">
-              <p class="video-label">
-                🎥 Découvrez notre message en vidéo ci-dessous :
+        <!-- Éléments décoratifs innovants avec lueurs rouges -->
+        <div class="hero-decorations">
+          <div class="floating-shape shape-1"></div>
+          <div class="floating-shape shape-2"></div>
+          <div class="floating-shape shape-3"></div>
+          <div class="red-glow glow-1"></div>
+          <div class="red-glow glow-2"></div>
+          <div class="red-glow glow-3"></div>
+          <div class="floating-dots">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        
+        <div class="container hero-content">
+          <div class="hero-main-grid">
+            <div class="hero-text">
+              <div class="hero-badge innovative-badge">
+                <div class="badge-glow"></div>
+                <i class="bi bi-heart"></i>
+                <span>Vos témoignages nous inspirent</span>
+                <div class="badge-particles">
+                  <span class="particle"></span>
+                  <span class="particle"></span>
+                  <span class="particle"></span>
+                </div>
+              </div>
+
+              <h1 class="hero-title">
+                Votre avis compte et inspire d'autres entrepreneurs
+              </h1>
+
+              <p class="hero-subtitle">
+                Chez MFINANCES, chaque client est unique. Votre confiance est notre plus grande fierté 
+                et vos retours nous aident à grandir et à offrir un accompagnement toujours plus proche de vos besoins.
               </p>
+              
+              <!-- Éléments de crédibilité innovants -->
+              <div class="credibility-elements">
+                <div class="trust-badge">
+                  <i class="bi bi-shield-check"></i>
+                  <span>Certifié Excellence</span>
+                </div>
+                <div class="experience-badge">
+                  <i class="bi bi-award"></i>
+                  <span>15+ ans d'expérience</span>
+                </div>
+                <div class="clients-badge">
+                  <i class="bi bi-people"></i>
+                  <span>2,500+ entreprises</span>
+                </div>
+              </div>
+              
+              <!-- Bouton CTA repositionné -->
+              <div class="hero-cta-inline">
+                <button
+                  class="cta-button-enhanced"
+                  onclick="document.getElementById('testimonial-form2').scrollIntoView({behavior: 'smooth'})"
+                >
+                  <span class="cta-glow"></span>
+                  <i class="bi bi-chat-dots"></i>
+                  <span>Témoigner maintenant</span>
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="hero-video">
+              <div class="video-container">
+                <div class="video-badge">
+                  <i class="bi bi-play-circle"></i>
+                  <span>Message de notre équipe</span>
+                </div>
+                
+                <div class="video-frame">
+                  <div class="video-overlay">
+                    <button 
+                      class="play-btn"
+                      onclick="this.parentElement.style.display='none'; document.getElementById('testimonials-video').src += '&autoplay=1';"
+                      aria-label="Lire la vidéo"
+                    >
+                      <i class="bi bi-play-fill"></i>
+                    </button>
+                  </div>
+                  
+                  <iframe
+                    id="testimonials-video"
+                    width="1206"
+                    height="678"
+                    src="https://www.youtube.com/embed/_PeAmqpaHjA"
+                    title="Message MFINANCES - Témoignages"
+                    frameborder="0"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="hero-media testimonials-video">
-            <div class="video-frame">
-              <iframe
-                id="testimonials-video"
-                width="1206"
-                height="678"
-                src="https://www.youtube.com/embed/_PeAmqpaHjA"
-                title="Message MFINANCES - Témoignages"
-                frameborder="0"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+
+        </div>
+      </section>
+
+      <!-- Section Choix de la méthode de témoignage -->
+      <section class="section testimonial-choice" id="testimonial-form2">
+        <div class="container">
+          <div class="choice-content">
+            <div class="actions-divider">⸻</div>
+            <h2 class="section-title choice-title">
+              Comment souhaitez-vous témoigner ?
+            </h2>
+            <p class="choice-description">
+              Choisissez la méthode qui vous convient le mieux
+            </p>
+
+            <div class="choice-grid">
+              <button class="choice-btn website-choice" id="websiteChoice">
+                <div class="btn-icon">
+                  <i class="bi bi-globe"></i>
+                </div>
+                <div class="btn-content">
+                  <h3 class="btn-title">Témoigner sur notre site</h3>
+                  <p class="btn-description">
+                    Partagez votre expérience avec texte, audio ou vidéo
+                  </p>
+                </div>
+                <i class="bi bi-arrow-right btn-arrow"></i>
+              </button>
+
+              <a
+                href="https://www.google.com/search?sca_esv=bd4826c8ba41a3de&sxsrf=AE3TifM3-FaoUqMNelL-lPkK2eH0t4T5uA:1756115093965&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EwY9wN49Ss6yAYNaMVwXLLnhCVrZfroQSEJ8Ic37tSPE45TmTK8NHm43mqXIGNlV9QOzePtNz3cqX83iRtIaiObLoZxVw1-lVXBh3mapUAuTKAMIXg%3D%3D&q=MFinances+%7C+Expert-Comptable+Avis&sa=X&ved=2ahUKEwie7_DC1qWPAxW1RKQEHcxVAFsQ0bkNegQIHhAE&biw=1680&bih=928&dpr=2#lrd=0x47c3c5d9d41dc777:0x4287de38397fa316,3,,,,"
+                target="_blank"
+                rel="noopener"
+                class="choice-btn google-choice"
+              >
+                <div class="btn-icon google-icon">
+                  <i class="bi bi-google"></i>
+                </div>
+                <div class="btn-content">
+                  <h3 class="btn-title">Avis Google My Business</h3>
+                  <p class="btn-description">
+                    Laissez un avis directement sur notre page Google
+                  </p>
+                </div>
+                <i class="bi bi-arrow-up-right btn-arrow"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -257,6 +373,52 @@
                     name="testimonialRating"
                   />
                 </div>
+                
+                <!-- Upload d'image pour témoignage texte -->
+                <div class="form-field">
+                  <label for="textImageUpload">Ajoutez votre photo (optionnel)</label>
+                  <p class="field-description">Une photo de vous rendra votre témoignage plus authentique et personnel</p>
+                  
+                  <div class="image-upload-zone" id="textImageUploadZone">
+                    <div class="upload-content">
+                      <i class="bi bi-camera upload-icon"></i>
+                      <h4>Ajoutez votre photo</h4>
+                      <p>Glissez-déposez une photo ici ou cliquez pour parcourir</p>
+                      <p class="file-formats">Formats acceptés : JPG, PNG (max 5MB)</p>
+                      <input
+                        type="file"
+                        id="textImageUpload"
+                        accept="image/jpeg,image/png,image/jpg"
+                        hidden
+                      />
+                      <button
+                        type="button"
+                        class="btn-upload"
+                        onclick="document.getElementById('textImageUpload').click()"
+                      >
+                        <i class="bi bi-folder-plus"></i>
+                        Choisir une photo
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div class="uploaded-image" id="textUploadedImage" style="display: none">
+                    <div class="image-preview">
+                      <img id="textImagePreview" src="" alt="Votre photo" />
+                    </div>
+                    <div class="file-info">
+                      <span class="file-name" id="textImageFileName"></span>
+                      <button
+                        type="button"
+                        class="btn-remove"
+                        id="removeTextImageBtn"
+                      >
+                        <i class="bi bi-trash"></i>
+                        Supprimer
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <!-- Témoignage audio -->
@@ -394,6 +556,52 @@
                     <span class="rating-text">Cliquez sur les étoiles</span>
                   </div>
                   <input type="hidden" id="audioRating" name="audioRating" />
+                </div>
+                
+                <!-- Upload d'image pour témoignage audio -->
+                <div class="form-field">
+                  <label for="audioImageUpload">Ajoutez votre photo (optionnel)</label>
+                  <p class="field-description">Associez une photo à votre témoignage vocal pour le rendre plus personnel</p>
+                  
+                  <div class="image-upload-zone" id="audioImageUploadZone">
+                    <div class="upload-content">
+                      <i class="bi bi-camera upload-icon"></i>
+                      <h4>Ajoutez votre photo</h4>
+                      <p>Glissez-déposez une photo ici ou cliquez pour parcourir</p>
+                      <p class="file-formats">Formats acceptés : JPG, PNG (max 5MB)</p>
+                      <input
+                        type="file"
+                        id="audioImageUpload"
+                        accept="image/jpeg,image/png,image/jpg"
+                        hidden
+                      />
+                      <button
+                        type="button"
+                        class="btn-upload"
+                        onclick="document.getElementById('audioImageUpload').click()"
+                      >
+                        <i class="bi bi-folder-plus"></i>
+                        Choisir une photo
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div class="uploaded-image" id="audioUploadedImage" style="display: none">
+                    <div class="image-preview">
+                      <img id="audioImagePreview" src="" alt="Votre photo" />
+                    </div>
+                    <div class="file-info">
+                      <span class="file-name" id="audioImageFileName"></span>
+                      <button
+                        type="button"
+                        class="btn-remove"
+                        id="removeAudioImageBtn"
+                      >
+                        <i class="bi bi-trash"></i>
+                        Supprimer
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -720,54 +928,6 @@
         </div>
       </section>
 
-      <!-- Section Choix de la méthode de témoignage -->
-      <section class="section testimonial-choice" id="testimonial-form2">
-        <div class="container">
-          <div class="choice-content">
-            <div class="actions-divider">⸻</div>
-            <h2 class="section-title choice-title">
-              Comment souhaitez-vous témoigner ?
-            </h2>
-            <p class="choice-description">
-              Choisissez la méthode qui vous convient le mieux
-            </p>
-
-            <div class="choice-grid">
-              <button class="choice-btn website-choice" id="websiteChoice">
-                <div class="btn-icon">
-                  <i class="bi bi-globe"></i>
-                </div>
-                <div class="btn-content">
-                  <h3 class="btn-title">Témoigner sur notre site</h3>
-                  <p class="btn-description">
-                    Partagez votre expérience avec texte, audio ou vidéo
-                  </p>
-                </div>
-                <i class="bi bi-arrow-right btn-arrow"></i>
-              </button>
-
-              <a
-                href="https://www.google.com/search?sca_esv=bd4826c8ba41a3de&sxsrf=AE3TifM3-FaoUqMNelL-lPkK2eH0t4T5uA:1756115093965&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-EwY9wN49Ss6yAYNaMVwXLLnhCVrZfroQSEJ8Ic37tSPE45TmTK8NHm43mqXIGNlV9QOzePtNz3cqX83iRtIaiObLoZxVw1-lVXBh3mapUAuTKAMIXg%3D%3D&q=MFinances+%7C+Expert-Comptable+Avis&sa=X&ved=2ahUKEwie7_DC1qWPAxW1RKQEHcxVAFsQ0bkNegQIHhAE&biw=1680&bih=928&dpr=2#lrd=0x47c3c5d9d41dc777:0x4287de38397fa316,3,,,,"
-                target="_blank"
-                rel="noopener"
-                class="choice-btn google-choice"
-              >
-                <div class="btn-icon google-icon">
-                  <i class="bi bi-google"></i>
-                </div>
-                <div class="btn-content">
-                  <h3 class="btn-title">Avis Google My Business</h3>
-                  <p class="btn-description">
-                    Laissez un avis directement sur notre page Google
-                  </p>
-                </div>
-                <i class="bi bi-arrow-up-right btn-arrow"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- Section Garanties et confiance -->
       <section class="section trust-section">
         <div class="container">
@@ -865,6 +1025,85 @@
         © <span id="year"></span> MFINANCES. Tous droits réservés.
       </div>
     </footer>
+
+    <!-- CTA flottant pour témoignage rapide -->
+    <div id="floatingCTA" class="floating-cta" style="display: none">
+      <div class="floating-cta-content">
+        <div class="floating-cta-close" id="closeCTA">
+          <i class="bi bi-x"></i>
+        </div>
+        <div class="floating-cta-icon">
+          <i class="bi bi-chat-heart"></i>
+        </div>
+        <h3 class="floating-cta-title">Votre avis compte !</h3>
+        <p class="floating-cta-text">
+          Partagez rapidement votre expérience avec MFINANCES
+        </p>
+        <div class="floating-cta-buttons">
+          <button class="btn btn-accent btn-sm" id="quickTestimonial">
+            <i class="bi bi-pencil-square"></i>
+            Témoigner maintenant
+          </button>
+          <a
+            href="https://wa.me/+212661234567?text=Bonjour%20MFINANCES%2C%20j%27aimerais%20partager%20mon%20t%C3%A9moignage%20par%20WhatsApp"
+            class="btn btn-outline btn-sm"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="bi bi-whatsapp"></i>
+            Via WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section WhatsApp Business pour témoignages -->
+    <section
+      class="whatsapp-testimonials"
+      id="whatsappTestimonials"
+      style="display: none"
+    >
+      <div class="container">
+        <div class="whatsapp-content">
+          <div class="whatsapp-icon">
+            <i class="bi bi-whatsapp"></i>
+          </div>
+          <h2>Témoignez facilement par WhatsApp</h2>
+          <p>
+            Envoyez-nous votre témoignage vocal ou vidéo directement depuis
+            votre smartphone
+          </p>
+          <div class="whatsapp-methods">
+            <div class="whatsapp-method">
+              <i class="bi bi-mic-fill"></i>
+              <span>Message vocal</span>
+            </div>
+            <div class="whatsapp-method">
+              <i class="bi bi-camera-video-fill"></i>
+              <span>Vidéo témoignage</span>
+            </div>
+            <div class="whatsapp-method">
+              <i class="bi bi-chat-text-fill"></i>
+              <span>Message texte</span>
+            </div>
+          </div>
+          <a
+            href="https://wa.me/+212661234567?text=Bonjour%20MFINANCES%2C%20j%27aimerais%20partager%20mon%20t%C3%A9moignage"
+            class="btn btn-whatsapp btn-lg"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="bi bi-whatsapp"></i>
+            Commencer sur WhatsApp
+          </a>
+          <p class="whatsapp-note">
+            <i class="bi bi-shield-check"></i>
+            Votre numéro reste privé. Nous utilisons WhatsApp Business pour une
+            communication sécurisée.
+          </p>
+        </div>
+      </div>
+    </section>
 
     <script src="./testimonials.js" defer></script>
   </body>
