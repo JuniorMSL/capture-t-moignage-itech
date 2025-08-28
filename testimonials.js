@@ -62,6 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeRatingSystem();
   initializeMethodCards();
   initializeFAQ();
+  
+  // Nouvelles fonctionnalités
+  initializeFloatingCTA();
+  initializeMobileOptimizations();
+  initializeImageUploads();
 
   // Set current year
   const yearElement = document.getElementById("year");
@@ -1031,3 +1036,376 @@ function initializeFAQ() {
     });
   });
 }
+
+// ===============================
+// GESTION DU CTA FLOTTANT
+// ===============================
+
+// Variables pour le CTA flottant
+let hasTestified = false;
+let ctaShown = false;
+let ctaDismissed = false;
+
+// Fonction pour initialiser le CTA flottant
+function initializeFloatingCTA() {
+  const floatingCTA = document.getElementById("floatingCTA");
+  const closeCTA = document.getElementById("closeCTA");
+  const quickTestimonial = document.getElementById("quickTestimonial");
+  
+  if (!floatingCTA) return;
+  
+  // Gestionnaire pour fermer le CTA
+  if (closeCTA) {
+    closeCTA.addEventListener("click", () => {
+      hideFloatingCTA();
+      ctaDismissed = true;
+      // Stocker dans localStorage que l'utilisateur a fermé le CTA
+      localStorage.setItem("ctaDismissed", "true");
+    });
+  }
+  
+  // Gestionnaire pour le bouton témoigner
+  if (quickTestimonial) {
+    quickTestimonial.addEventListener("click", () => {
+      hideFloatingCTA();
+      showTestimonialForm();
+      hasTestified = true;
+    });
+  }
+  
+  // Vérifier si le CTA a été fermé précédemment
+  if (localStorage.getItem("ctaDismissed") === "true") {
+    ctaDismissed = true;
+  }
+  
+  // Initialiser le scroll listener
+  initializeScrollDetection();
+}
+
+// Fonction pour détecter le scroll et afficher le CTA
+function initializeScrollDetection() {
+  let scrollTimeout;
+  
+  function handleScroll() {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      checkScrollPosition();
+    }, 100);
+  }
+  
+  function checkScrollPosition() {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollPercent = (scrollPosition + windowHeight) / documentHeight;
+    
+    // Afficher le CTA après 40% de scroll ou après 15 secondes
+    const shouldShowCTA = (scrollPercent > 0.4 || getTimeOnPage() > 15000);
+    
+    if (shouldShowCTA && !hasTestified && !ctaShown && !ctaDismissed) {
+      showFloatingCTA();
+    }
+  }
+  
+  // Ajouter le listener de scroll
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  
+  // Timer de fallback après 20 secondes
+  setTimeout(() => {
+    if (!hasTestified && !ctaShown && !ctaDismissed) {
+      showFloatingCTA();
+    }
+  }, 20000);
+}
+
+// Fonction pour obtenir le temps passé sur la page
+function getTimeOnPage() {
+  return Date.now() - (window.pageStartTime || Date.now());
+}
+
+// Fonction pour afficher le CTA flottant
+function showFloatingCTA() {
+  const floatingCTA = document.getElementById("floatingCTA");
+  if (!floatingCTA || ctaShown) return;
+  
+  floatingCTA.style.display = "block";
+  ctaShown = true;
+  
+  // Animation d'entrée
+  setTimeout(() => {
+    floatingCTA.style.opacity = "1";
+    floatingCTA.style.transform = "translateX(0)";
+  }, 100);
+  
+  // Auto-hide après 30 secondes si pas d'interaction
+  setTimeout(() => {
+    if (ctaShown && !hasTestified) {
+      hideFloatingCTA();
+    }
+  }, 30000);
+}
+
+// Fonction pour masquer le CTA flottant
+function hideFloatingCTA() {
+  const floatingCTA = document.getElementById("floatingCTA");
+  if (!floatingCTA) return;
+  
+  floatingCTA.style.opacity = "0";
+  floatingCTA.style.transform = "translateX(100%)";
+  
+  setTimeout(() => {
+    floatingCTA.style.display = "none";
+    ctaShown = false;
+  }, 300);
+}
+
+// ===============================
+// AMÉLIORATIONS MOBILES
+// ===============================
+
+// Fonction pour détecter et optimiser l'expérience mobile
+function initializeMobileOptimizations() {
+  // Détection mobile
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    // Optimisation du CTA pour mobile
+    adjustCTAForMobile();
+    
+    // Optimisation des formulaires pour mobile
+    optimizeFormsForMobile();
+    
+    // Optimisation de la navigation pour mobile
+    optimizeNavigationForMobile();
+  }
+  
+  // Listener pour les changements d'orientation
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => {
+      if (window.innerWidth <= 768) {
+        adjustCTAForMobile();
+      }
+    }, 500);
+  });
+}
+
+// Ajustements CTA pour mobile
+function adjustCTAForMobile() {
+  const floatingCTA = document.getElementById("floatingCTA");
+  if (floatingCTA) {
+    // Positionnement optimisé pour mobile
+    floatingCTA.style.bottom = "10px";
+    floatingCTA.style.right = "10px";
+    floatingCTA.style.width = "300px";
+  }
+}
+
+// Optimisation des formulaires pour mobile
+function optimizeFormsForMobile() {
+  const forms = document.querySelectorAll("form");
+  forms.forEach(form => {
+    // Ajuster les inputs pour mobile
+    const inputs = form.querySelectorAll("input, textarea, select");
+    inputs.forEach(input => {
+      input.addEventListener("focus", () => {
+        // Scroll pour éviter que le clavier cache l'input
+        setTimeout(() => {
+          input.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 300);
+      });
+    });
+  });
+}
+
+// Optimisation de la navigation pour mobile
+function optimizeNavigationForMobile() {
+  // Améliorer le scroll smooth sur mobile
+  document.querySelectorAll("a[href^='#']").forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        const offset = 80; // Offset pour la header sticky
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth"
+        });
+      }
+    });
+  });
+}
+
+// ===============================
+// GESTION DES UPLOADS D'IMAGE
+// ===============================
+
+// Fonction pour initialiser les uploads d'image
+function initializeImageUploads() {
+  // Image upload pour témoignage texte
+  initializeImageUpload('text');
+  
+  // Image upload pour témoignage audio
+  initializeImageUpload('audio');
+}
+
+// Fonction générique pour initialiser l'upload d'image
+function initializeImageUpload(type) {
+  const fileInput = document.getElementById(`${type}ImageUpload`);
+  const uploadZone = document.getElementById(`${type}ImageUploadZone`);
+  const uploadedImage = document.getElementById(`${type}UploadedImage`);
+  const imagePreview = document.getElementById(`${type}ImagePreview`);
+  const fileName = document.getElementById(`${type}ImageFileName`);
+  const removeBtn = document.getElementById(`remove${type.charAt(0).toUpperCase() + type.slice(1)}ImageBtn`);
+  
+  if (!fileInput || !uploadZone) return;
+  
+  // Gestion du drag & drop
+  uploadZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadZone.classList.add('drag-over');
+  });
+  
+  uploadZone.addEventListener('dragleave', () => {
+    uploadZone.classList.remove('drag-over');
+  });
+  
+  uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadZone.classList.remove('drag-over');
+    
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      handleImageFile(files[0], type);
+    }
+  });
+  
+  // Gestion du clic sur la zone
+  uploadZone.addEventListener('click', () => {
+    fileInput.click();
+  });
+  
+  // Gestion de la sélection de fichier
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleImageFile(file, type);
+    }
+  });
+  
+  // Gestion du bouton supprimer
+  if (removeBtn) {
+    removeBtn.addEventListener('click', () => {
+      removeImage(type);
+    });
+  }
+}
+
+// Fonction pour traiter le fichier image
+function handleImageFile(file, type) {
+  // Validation du fichier
+  const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+  const maxSize = 5 * 1024 * 1024; // 5MB
+  
+  if (!validTypes.includes(file.type)) {
+    showImageError('Format non supporté. Veuillez choisir une image JPG ou PNG.', type);
+    return;
+  }
+  
+  if (file.size > maxSize) {
+    showImageError('Fichier trop volumineux. Taille maximum : 5MB.', type);
+    return;
+  }
+  
+  // Créer un aperçu de l'image
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    displayImagePreview(e.target.result, file.name, type);
+  };
+  reader.readAsDataURL(file);
+}
+
+// Fonction pour afficher l'aperçu de l'image
+function displayImagePreview(src, name, type) {
+  const uploadZone = document.getElementById(`${type}ImageUploadZone`);
+  const uploadedImage = document.getElementById(`${type}UploadedImage`);
+  const imagePreview = document.getElementById(`${type}ImagePreview`);
+  const fileName = document.getElementById(`${type}ImageFileName`);
+  
+  if (uploadZone && uploadedImage && imagePreview && fileName) {
+    // Masquer la zone d'upload et afficher l'aperçu
+    uploadZone.style.display = 'none';
+    uploadedImage.style.display = 'block';
+    
+    // Mettre à jour l'aperçu
+    imagePreview.src = src;
+    fileName.textContent = name;
+    
+    // Animation d'apparition
+    uploadedImage.style.opacity = '0';
+    uploadedImage.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      uploadedImage.style.transition = 'all 0.3s ease';
+      uploadedImage.style.opacity = '1';
+      uploadedImage.style.transform = 'translateY(0)';
+    }, 100);
+  }
+}
+
+// Fonction pour supprimer l'image
+function removeImage(type) {
+  const fileInput = document.getElementById(`${type}ImageUpload`);
+  const uploadZone = document.getElementById(`${type}ImageUploadZone`);
+  const uploadedImage = document.getElementById(`${type}UploadedImage`);
+  const imagePreview = document.getElementById(`${type}ImagePreview`);
+  
+  if (fileInput && uploadZone && uploadedImage && imagePreview) {
+    // Réinitialiser le input
+    fileInput.value = '';
+    
+    // Animation de disparition puis affichage de la zone d'upload
+    uploadedImage.style.opacity = '0';
+    uploadedImage.style.transform = 'translateY(-20px)';
+    
+    setTimeout(() => {
+      uploadedImage.style.display = 'none';
+      uploadZone.style.display = 'block';
+      imagePreview.src = '';
+      
+      // Animation d'apparition de la zone d'upload
+      uploadZone.style.opacity = '0';
+      uploadZone.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        uploadZone.style.transition = 'all 0.3s ease';
+        uploadZone.style.opacity = '1';
+        uploadZone.style.transform = 'translateY(0)';
+      }, 50);
+    }, 300);
+  }
+}
+
+// Fonction pour afficher les erreurs d'upload
+function showImageError(message, type) {
+  const uploadZone = document.getElementById(`${type}ImageUploadZone`);
+  if (!uploadZone) return;
+  
+  // Créer ou récupérer l'élément d'erreur
+  let errorElement = uploadZone.querySelector('.upload-error');
+  if (!errorElement) {
+    errorElement = document.createElement('div');
+    errorElement.className = 'upload-error';
+    uploadZone.appendChild(errorElement);
+  }
+  
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+  
+  // Masquer l'erreur après 5 secondes
+  setTimeout(() => {
+    errorElement.style.display = 'none';
+  }, 5000);
+}
+
+// Stocker le temps de démarrage de la page
+window.pageStartTime = Date.now();
