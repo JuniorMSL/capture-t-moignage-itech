@@ -164,7 +164,7 @@ p {
   text-decoration: none;
 }
 .brand-logo {
-  height: 32px;
+  height: 62px;
   width: auto;
   filter: brightness(1.1);
 }
@@ -2751,26 +2751,12 @@ button.choice-btn {
 /* Message de clôture */
 .closing-message {
   padding: 80px 0;
-  background: linear-gradient(135deg, #0f4753 0%, #0b3540 100%);
+  /* background: linear-gradient(135deg, #0f4753 0%, #0b3540 100%); */
   color: white;
   position: relative;
   overflow: hidden;
 }
 
-.closing-message::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 60, 60, 0.1) 0%,
-    transparent 70%
-  );
-  animation: slowRotate 20s linear infinite;
-}
 
 @keyframes slowRotate {
   from {
