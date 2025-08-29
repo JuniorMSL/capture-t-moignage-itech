@@ -30,6 +30,7 @@ app.post("/api/testimonials", async (req, res) => {
       videoRating,
       audioFileUrl,
       videoFileUrl,
+      imageFileUrl,
       allowWebsite,
       testimonialType = "text",
     } = req.body;
@@ -40,6 +41,14 @@ app.post("/api/testimonials", async (req, res) => {
         error: "Nom et email sont obligatoires",
       });
     }
+
+    // Debug: données reçues
+    console.log("Données reçues (/api/testimonials - express):", {
+      audioFileUrl,
+      videoFileUrl,
+      imageFileUrl,
+      testimonialType,
+    });
 
     // Déterminer le type de témoignage et la note
     let finalType = testimonialType;
@@ -69,6 +78,7 @@ app.post("/api/testimonials", async (req, res) => {
           testimonial_type: finalType,
           content: content || null,
           media_url: mediaUrl,
+          image_url: imageFileUrl || null,
           rating: parseInt(finalRating) || null,
           allow_website_publication: allowWebsite || false,
           status: "pending",
@@ -120,8 +130,25 @@ app.post("/api/upload-media", async (req, res) => {
     const uniqueFileName = `${timestamp}-${fileName}`;
 
     // Déterminer le dossier selon le type de fichier
-    const folder = fileType.startsWith("audio/") ? "audio" : "video";
+    let folder;
+    if (fileType && fileType.startsWith("audio/")) {
+      folder = "audio";
+    } else if (fileType && fileType.startsWith("video/")) {
+      folder = "video";
+    } else if (fileType && fileType.startsWith("image/")) {
+      folder = "images";
+    } else {
+      folder = "other";
+    }
     const filePath = `testimonials/${folder}/${uniqueFileName}`;
+
+    // Debug: chemin d'upload choisi
+    console.log("Upload-media (/api/upload-media - express):", {
+      fileName,
+      fileType,
+      folder,
+      filePath,
+    });
 
     // Upload vers Supabase Storage
     const { data, error } = await supabase.storage

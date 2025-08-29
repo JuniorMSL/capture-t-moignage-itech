@@ -30,6 +30,7 @@ export default async function handler(req, res) {
       videoRating,
       audioFileUrl,
       videoFileUrl,
+      imageFileUrl,
       allowWebsite,
       testimonialType = "text",
     } = req.body;
@@ -40,6 +41,14 @@ export default async function handler(req, res) {
         error: "Nom et email sont obligatoires",
       });
     }
+
+    // Log pour debug
+    console.log("Données reçues:", {
+      audioFileUrl,
+      videoFileUrl,
+      imageFileUrl,
+      testimonialType
+    });
 
     // Déterminer le type de témoignage et la note
     let finalType = testimonialType;
@@ -56,6 +65,16 @@ export default async function handler(req, res) {
       finalRating = videoRating || testimonialRating;
       mediaUrl = videoFileUrl;
     }
+    
+    // Log des médias détectés
+    if (imageFileUrl) {
+      console.log("Image détectée:", imageFileUrl);
+    }
+    if (mediaUrl) {
+      console.log("Média principal détecté:", mediaUrl);
+    }
+
+    console.log("Media URL finale:", mediaUrl);
 
     // Insérer le témoignage dans la base de données
     const { data, error } = await supabase
@@ -69,6 +88,7 @@ export default async function handler(req, res) {
           testimonial_type: finalType,
           content: content || null,
           media_url: mediaUrl,
+          image_url: imageFileUrl || null,
           rating: parseInt(finalRating) || null,
           allow_website_publication: allowWebsite || false,
           status: "pending", // pending, approved, rejected

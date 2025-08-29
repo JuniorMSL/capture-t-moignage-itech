@@ -1288,7 +1288,11 @@ input[type="number"]:focus {
 .red-glow {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 60, 60, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 60, 60, 0.15) 0%,
+    transparent 70%
+  );
   filter: blur(20px);
   animation: glow-pulse 6s ease-in-out infinite;
   pointer-events: none;
@@ -1319,7 +1323,8 @@ input[type="number"]:focus {
 }
 
 @keyframes glow-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
     transform: scale(1);
   }
@@ -1353,13 +1358,18 @@ input[type="number"]:focus {
 }
 
 .cta-button-enhanced::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s ease;
 }
 
@@ -1387,7 +1397,8 @@ input[type="number"]:focus {
 }
 
 @keyframes button-glow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.7;
     transform: scale(1);
   }
@@ -1458,7 +1469,8 @@ input[type="number"]:focus {
 }
 
 @keyframes hologram-glow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.6;
     filter: blur(6px) hue-rotate(0deg);
   }
@@ -1469,7 +1481,8 @@ input[type="number"]:focus {
 }
 
 @keyframes particle-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) scale(1);
     opacity: 0.8;
   }
@@ -1478,8 +1491,6 @@ input[type="number"]:focus {
     opacity: 1;
   }
 }
-
-
 
 /* Badge épuré et discret */
 .hero-badge {
@@ -2759,7 +2770,6 @@ button.choice-btn {
   overflow: hidden;
 }
 
-
 @keyframes slowRotate {
   from {
     transform: rotate(0deg);
@@ -3876,13 +3886,36 @@ button.choice-btn {
 .floating-cta-buttons {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  width: 100%;
+}
+
+.desktop-buttons,
+.mobile-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .floating-cta-buttons .btn {
   justify-content: center;
+  font-size: 13px;
+  padding: 10px 14px;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.floating-cta-buttons .btn i {
+  margin-right: 6px;
   font-size: 14px;
-  padding: 12px 16px;
 }
 
 .btn-outline {

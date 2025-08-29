@@ -403,7 +403,6 @@
                       <button
                         type="button"
                         class="btn-upload"
-                        onclick="document.getElementById('textImageUpload').click()"
                       >
                         <i class="bi bi-folder-plus"></i>
                         Choisir une photo
@@ -527,7 +526,6 @@
                         <button
                           type="button"
                           class="btn-upload"
-                          onclick="document.getElementById('audioFileInput').click()"
                         >
                           <i class="bi bi-folder-plus"></i>
                           Choisir un fichier
@@ -600,7 +598,6 @@
                       <button
                         type="button"
                         class="btn-upload"
-                        onclick="document.getElementById('audioImageUpload').click()"
                       >
                         <i class="bi bi-folder-plus"></i>
                         Choisir une photo
@@ -737,7 +734,6 @@
                         <button
                           type="button"
                           class="btn-upload"
-                          onclick="document.getElementById('videoFileInput').click()"
                         >
                           <i class="bi bi-folder-plus"></i>
                           Choisir un fichier
@@ -1112,19 +1108,44 @@
           Partagez rapidement votre expérience avec MFINANCES
         </p>
         <div class="floating-cta-buttons">
-          <button class="btn btn-accent btn-sm" id="quickTestimonial">
-            <i class="bi bi-pencil-square"></i>
-            Témoigner maintenant
-          </button>
-          <a
-            href="https://wa.me/+212661234567?text=Bonjour%20MFINANCES%2C%20j%27aimerais%20partager%20mon%20t%C3%A9moignage%20par%20WhatsApp"
-            class="btn btn-outline btn-sm"
-            target="_blank"
-            rel="noopener"
-          >
-            <i class="bi bi-whatsapp"></i>
-            Via WhatsApp
-          </a>
+          <!-- Boutons Desktop -->
+          <div class="desktop-buttons">
+            <button class="btn btn-accent btn-sm" id="quickTestimonial">
+              <i class="bi bi-pencil-square"></i>
+              Sur le site
+            </button>
+            <a
+              href="https://www.google.com/maps/place/MFinances+%7C+Expert-Comptable/@35.2037414,-6.1410663,17z/data=!4m8!3m7!1s0x47c3c5d9d41dc777:0x4287de38397fa316!8m2!3d35.2037414!4d-6.1410663!9m1!1b1!16s%2Fg%2F11y3k0_v8k?entry=ttu&g_ep=EgoyMDI1MDEyNy4wIKXMDSoASAFQAw%3D%3D#lrd=0x47c3c5d9d41dc777:0x4287de38397fa316,3"
+              class="btn btn-outline btn-sm"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="bi bi-google"></i>
+              Google My Business
+            </a>
+          </div>
+          
+          <!-- Boutons Mobile -->
+          <div class="mobile-buttons" style="display: none;">
+            <a
+              href="https://wa.me/+212661234567?text=Bonjour%20MFINANCES%2C%20j%27aimerais%20partager%20mon%20t%C3%A9moignage%20par%20WhatsApp"
+              class="btn btn-accent btn-sm"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="bi bi-whatsapp"></i>
+              Via WhatsApp
+            </a>
+            <a
+              href="https://www.google.com/maps/place/MFinances+%7C+Expert-Comptable/@35.2037414,-6.1410663,17z/data=!4m8!3m7!1s0x47c3c5d9d41dc777:0x4287de38397fa316!8m2!3d35.2037414!4d-6.1410663!9m1!1b1!16s%2Fg%2F11y3k0_v8k?entry=ttu&g_ep=EgoyMDI1MDEyNy4wIKXMDSoASAFQAw%3D%3D#lrd=0x47c3c5d9d41dc777:0x4287de38397fa316,3"
+              class="btn btn-outline btn-sm"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="bi bi-google"></i>
+              Google My Business
+            </a>
+          </div>
         </div>
       </div>
     </div>

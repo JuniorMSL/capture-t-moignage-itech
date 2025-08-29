@@ -11,6 +11,7 @@ CREATE TABLE testimonials (
     testimonial_type VARCHAR(20) NOT NULL CHECK (testimonial_type IN ('text', 'audio', 'video')),
     content TEXT, -- Contenu textuel du témoignage (peut être null pour audio/vidéo)
     media_url TEXT, -- URL du fichier audio/vidéo stocké dans Supabase Storage
+    image_url TEXT, -- URL d'une image liée au témoignage (miniature, avatar)
     rating INTEGER CHECK (rating >= 1 AND rating <= 5),
     allow_website_publication BOOLEAN DEFAULT false,
     status VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
@@ -62,6 +63,7 @@ COMMENT ON TABLE testimonials IS 'Table pour stocker les témoignages clients';
 COMMENT ON COLUMN testimonials.testimonial_type IS 'Type de témoignage: text, audio, ou video';
 COMMENT ON COLUMN testimonials.content IS 'Contenu textuel (obligatoire pour type text)';
 COMMENT ON COLUMN testimonials.media_url IS 'URL du fichier média stocké dans Supabase Storage';
+COMMENT ON COLUMN testimonials.image_url IS 'URL de l\'image liée au témoignage (ex: vignette)';
 COMMENT ON COLUMN testimonials.status IS 'Statut de modération: pending, approved, rejected';
 COMMENT ON COLUMN testimonials.allow_website_publication IS 'Autorisation de publication sur le site web';
 

@@ -35,9 +35,23 @@ export default async function handler(req, res) {
     const timestamp = Date.now();
     const uniqueFileName = `${timestamp}-${fileName}`;
 
+    // Log pour debug
+    console.log("Upload-media reçu:", { fileName, fileType });
+
     // Déterminer le dossier selon le type de fichier
-    const folder = fileType.startsWith("audio/") ? "audio" : "video";
+    let folder;
+    if (fileType.startsWith("audio/")) {
+      folder = "audio";
+    } else if (fileType.startsWith("video/")) {
+      folder = "video";
+    } else if (fileType.startsWith("image/")) {
+      folder = "images";
+    } else {
+      folder = "other";
+    }
     const filePath = `testimonials/${folder}/${uniqueFileName}`;
+    
+    console.log("Dossier choisi:", folder, "Chemin:", filePath);
 
     // Upload vers Supabase Storage
     const { data, error } = await supabase.storage

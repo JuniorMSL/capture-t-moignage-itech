@@ -1,10 +1,13 @@
 // Configuration et variables globales
 let mediaRecorder = null;
 let recordedChunks = [];
+let audioRecordedChunks = [];
+let videoRecordedChunks = [];
 let isRecording = false;
 let recordingTimer = null;
 let recordingStartTime = null;
 let currentStream = null;
+let currentRecordingType = null; // 'audio' ou 'video'
 
 // Variables pour les éléments DOM
 const elements = {};
@@ -316,6 +319,8 @@ function initializeAudioUpload() {
 
   // Gestion du clic sur la zone
   uploadZone.addEventListener("click", () => {
+    // Permettre de re-sélectionner le même fichier
+    fileInput.value = "";
     fileInput.click();
   });
 
@@ -403,6 +408,8 @@ function initializeVideoUpload() {
 
   // Gestion du clic sur la zone
   uploadZone.addEventListener("click", () => {
+    // Permettre de re-sélectionner le même fichier
+    fileInput.value = "";
     fileInput.click();
   });
 
@@ -543,10 +550,13 @@ async function startAudioRecording() {
 
     mediaRecorder = new MediaRecorder(currentStream, options);
     recordedChunks = [];
+    audioRecordedChunks = [];
+    currentRecordingType = 'audio';
 
     mediaRecorder.ondataavailable = (event) => {
       if (event.data.size > 0) {
         recordedChunks.push(event.data);
+        audioRecordedChunks.push(event.data);
       }
     };
 
@@ -616,10 +626,13 @@ async function startVideoRecording() {
 
     mediaRecorder = new MediaRecorder(currentStream, options);
     recordedChunks = [];
+    videoRecordedChunks = [];
+    currentRecordingType = 'video';
 
     mediaRecorder.ondataavailable = (event) => {
       if (event.data.size > 0) {
         recordedChunks.push(event.data);
+        videoRecordedChunks.push(event.data);
       }
     };
 
@@ -751,7 +764,7 @@ function resetAudioRecording() {
   elements.recordingStatus
     .querySelector(".status-indicator")
     .classList.remove("recording");
-  recordedChunks = [];
+  audioRecordedChunks = [];
 }
 
 function resetVideoRecording() {
@@ -765,7 +778,7 @@ function resetVideoRecording() {
   elements.videoRecordingStatus
     .querySelector(".status-indicator")
     .classList.remove("recording");
-  recordedChunks = [];
+  videoRecordedChunks = [];
 }
 
 // Nettoyage des enregistrements
@@ -842,6 +855,20 @@ async function handleFormSubmit(event) {
       elements.testimonialForm.reset();
       resetAudioRecording();
       resetVideoRecording();
+      // Reset des inputs file
+      const audioFileInput = document.getElementById('audioFileInput');
+      const videoFileInput = document.getElementById('videoFileInput');
+      const textImageInput = document.getElementById('textImageUpload');
+      const audioImageInput = document.getElementById('audioImageUpload');
+      if (audioFileInput) audioFileInput.value = '';
+      if (videoFileInput) videoFileInput.value = '';
+      if (textImageInput) textImageInput.value = '';
+      if (audioImageInput) audioImageInput.value = '';
+      
+      // Reset des preview d'images
+      removeImage('text');
+      removeImage('audio');
+      
       feedback.textContent = "";
     }, 3000);
   } catch (error) {
@@ -863,34 +890,60 @@ async function simulateFormSubmission(formData) {
       data[key] = value;
     }
 
-    // Gérer les fichiers audio/vidéo
+    // Gérer les fichiers audio/vidéo/images
     let audioFileUrl = null;
     let videoFileUrl = null;
+    let imageFileUrl = null;
 
-    // Upload du fichier audio si présent
-    const audioFile = formData.get('audioFile');
-    if (audioFile && audioFile instanceof Blob && audioFile.size > 0) {
-      audioFileUrl = await uploadMediaFile(audioFile, 'audio');
+    // Upload du fichier audio si présent (soit uploadé soit enregistré)
+    const audioFileInput = document.getElementById('audioFileInput');
+    if (audioFileInput && audioFileInput.files.length > 0) {
+      audioFileUrl = await uploadMediaFile(audioFileInput.files[0], 'audio');
+    } else if (audioRecordedChunks.length > 0) {
+      // Fichier audio enregistré
+      const audioBlob = new Blob(audioRecordedChunks, { type: 'audio/webm' });
+      audioFileUrl = await uploadMediaFile(audioBlob, 'audio');
     }
 
-    // Upload du fichier vidéo si présent  
-    const videoFile = formData.get('videoFile');
-    if (videoFile && videoFile instanceof Blob && videoFile.size > 0) {
-      videoFileUrl = await uploadMediaFile(videoFile, 'video');
+    // Upload du fichier vidéo si présent (soit uploadé soit enregistré)
+    const videoFileInput = document.getElementById('videoFileInput');
+    if (videoFileInput && videoFileInput.files.length > 0) {
+      videoFileUrl = await uploadMediaFile(videoFileInput.files[0], 'video');
+    } else if (videoRecordedChunks.length > 0) {
+      // Fichier vidéo enregistré
+      const videoBlob = new Blob(videoRecordedChunks, { type: 'video/webm' });
+      videoFileUrl = await uploadMediaFile(videoBlob, 'video');
+    }
+
+    // Upload des images si présentes
+    const textImageInput = document.getElementById('textImageUpload');
+    if (textImageInput && textImageInput.files.length > 0) {
+      console.log('Uploading text image:', textImageInput.files[0].type);
+      imageFileUrl = await uploadMediaFile(textImageInput.files[0], 'image');
+    } else {
+      // Vérifier aussi l'image pour audio
+      const audioImageInput = document.getElementById('audioImageUpload');
+      if (audioImageInput && audioImageInput.files.length > 0) {
+        console.log('Uploading audio image:', audioImageInput.files[0].type);
+        imageFileUrl = await uploadMediaFile(audioImageInput.files[0], 'image');
+      }
     }
 
     // Déterminer le type de témoignage
     let testimonialType = 'text';
-    if (audioFileUrl || recordedChunks.length > 0) {
+    if (audioFileUrl) {
       testimonialType = 'audio';
-      // Si on a un enregistrement mais pas de fichier uploadé
-      if (!audioFileUrl && recordedChunks.length > 0) {
-        const audioBlob = new Blob(recordedChunks, { type: 'audio/webm' });
-        audioFileUrl = await uploadMediaFile(audioBlob, 'audio');
-      }
     } else if (videoFileUrl) {
       testimonialType = 'video';
     }
+
+    // Log pour debug
+    console.log("URLs générées:", {
+      audioFileUrl,
+      videoFileUrl,
+      imageFileUrl,
+      testimonialType
+    });
 
     // Préparer les données pour l'API
     const testimonialData = {
@@ -905,8 +958,11 @@ async function simulateFormSubmission(formData) {
       allowWebsite: data.allowWebsite === 'on',
       testimonialType: testimonialType,
       audioFileUrl: audioFileUrl,
-      videoFileUrl: videoFileUrl
+      videoFileUrl: videoFileUrl,
+      imageFileUrl: imageFileUrl
     };
+
+    console.log("Données envoyées à l'API:", testimonialData);
 
     // Envoyer vers l'API Vercel
     const response = await fetch('/api/testimonials', {
@@ -976,7 +1032,12 @@ function getFileExtension(mimeType) {
     'video/webm': 'webm',
     'video/mp4': 'mp4',
     'video/mov': 'mov',
-    'video/avi': 'avi'
+    'video/avi': 'avi',
+    'image/jpeg': 'jpg',
+    'image/jpg': 'jpg',
+    'image/png': 'png',
+    'image/gif': 'gif',
+    'image/webp': 'webp'
   };
   return extensions[mimeType] || 'bin';
 }
@@ -1116,6 +1177,12 @@ function initializeScrollDetection() {
       showFloatingCTA();
     }
   }, 20000);
+  
+  // Debug temporaire - force après 3 secondes
+  setTimeout(() => {
+    console.log("Force CTA pour debug");
+    showFloatingCTA();
+  }, 3000);
 }
 
 // Fonction pour obtenir le temps passé sur la page
@@ -1125,8 +1192,26 @@ function getTimeOnPage() {
 
 // Fonction pour afficher le CTA flottant
 function showFloatingCTA() {
+  console.log("showFloatingCTA called");
   const floatingCTA = document.getElementById("floatingCTA");
+  console.log("floatingCTA element:", floatingCTA);
+  console.log("ctaShown:", ctaShown);
   if (!floatingCTA || ctaShown) return;
+  
+  // Détecter si mobile ou desktop
+  const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  // Afficher les bons boutons selon le device
+  const desktopButtons = floatingCTA.querySelector('.desktop-buttons');
+  const mobileButtons = floatingCTA.querySelector('.mobile-buttons');
+  
+  if (isMobile) {
+    if (desktopButtons) desktopButtons.style.display = 'none';
+    if (mobileButtons) mobileButtons.style.display = 'block';
+  } else {
+    if (desktopButtons) desktopButtons.style.display = 'block';
+    if (mobileButtons) mobileButtons.style.display = 'none';
+  }
   
   floatingCTA.style.display = "block";
   ctaShown = true;
@@ -1283,6 +1368,8 @@ function initializeImageUpload(type) {
   
   // Gestion du clic sur la zone
   uploadZone.addEventListener('click', () => {
+    // Permettre de re-sélectionner le même fichier
+    fileInput.value = '';
     fileInput.click();
   });
   
