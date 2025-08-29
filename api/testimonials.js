@@ -195,11 +195,3 @@ module.exports.config = {
     },
   },
 };
-
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "50mb",
-    },
-  },
-};

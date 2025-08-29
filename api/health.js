@@ -1,0 +1,10 @@
+module.exports = function handler(req, res) {
+  res.status(200).json({ ok: true, now: new Date().toISOString() });
+};
+
+module.exports.config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
