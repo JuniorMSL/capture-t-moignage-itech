@@ -12,6 +12,16 @@ function getSupabase() {
 }
 
 async function handler(req, res) {
+  // Gestion CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
+  // Gestion de la requête OPTIONS (preflight)
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method === "GET") {
     return handleGet(req, res);
   }
