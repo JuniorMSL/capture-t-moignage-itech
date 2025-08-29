@@ -4,12 +4,11 @@
   "description": "Page de capture de témoignages avec intégration Supabase",
   "main": "index.js",
   "scripts": {
-    "dev": "npx vercel dev --listen 3000",
-    "dev:express": "node server.js",
+    "dev": "node server.js",
+    "dev:vercel": "npx vercel dev --listen 3000", 
     "build": "vercel build",
     "deploy": "vercel --prod",
-    "check-env": "node scripts/check-env.js",
-    "predev": "npm run check-env"
+    "check-env": "node scripts/check-env.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",

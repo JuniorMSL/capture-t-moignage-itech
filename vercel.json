@@ -1,10 +1,10 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+  "functions": {
+    "api/testimonials.js": {
+      "maxDuration": 30
+    },
+    "api/upload-media.js": {
+      "maxDuration": 60
+    }
+  }
 }
