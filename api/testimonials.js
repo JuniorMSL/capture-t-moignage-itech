@@ -14,6 +14,10 @@ const supabase = createClient(
 );
 
 export default async function handler(req, res) {
+  if (req.method === "GET") {
+    return handleGet(req, res);
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Méthode non autorisée" });
   }
@@ -118,6 +122,66 @@ export default async function handler(req, res) {
     return res.status(500).json({
       error: "Erreur serveur lors de la sauvegarde",
       details: error.message,
+    });
+  }
+}
+
+// GET /api/testimonials
+// Query params pris en charge:
+// - status: 'approved' (défaut), 'pending', 'rejected', 'all'
+// - type: 'text' | 'audio' | 'video' (optionnel)
+// - limit: nombre d'éléments (défaut 20, max 100)
+// - offset: décalage de départ (défaut 0)
+// - order: 'asc' | 'desc' sur created_at (défaut 'desc')
+async function handleGet(req, res) {
+  try {
+    const {
+      status = "approved",
+      type,
+      limit: rawLimit = "20",
+      offset: rawOffset = "0",
+      order = "desc",
+    } = req.query || {};
+
+    const limit = Math.min(Math.max(parseInt(rawLimit, 10) || 20, 1), 100);
+    const offset = Math.max(parseInt(rawOffset, 10) || 0, 0);
+    const end = offset + limit - 1;
+
+    let query = supabase
+      .from("testimonials")
+      .select("*")
+      .order("created_at", { ascending: order === "asc" });
+
+    if (status !== "all") {
+      query = query.eq("status", status);
+    }
+
+    if (type) {
+      query = query.eq("testimonial_type", String(type));
+    }
+
+    query = query.range(offset, end);
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error("Erreur lecture Supabase:", error);
+      return res.status(500).json({
+        error: "Erreur lors de la récupération des témoignages",
+        details: error.message,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      items: data || [],
+      meta: { limit, offset, order, status, type: type || null },
+    });
+  } catch (err) {
+    console.error("Erreur GET testimonials:", err);
+    return res.status(500).json({
+      error: "Erreur serveur lors de la récupération",
+      details: err.message,
     });
   }
 }

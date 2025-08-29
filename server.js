@@ -111,6 +111,60 @@ app.post("/api/testimonials", async (req, res) => {
   }
 });
 
+// Route GET pour récupérer les témoignages
+app.get("/api/testimonials", async (req, res) => {
+  try {
+    const {
+      status = "approved",
+      type,
+      limit: rawLimit = "20",
+      offset: rawOffset = "0",
+      order = "desc",
+    } = req.query || {};
+
+    const limit = Math.min(Math.max(parseInt(rawLimit, 10) || 20, 1), 100);
+    const offset = Math.max(parseInt(rawOffset, 10) || 0, 0);
+    const end = offset + limit - 1;
+
+    let query = supabase
+      .from("testimonials")
+      .select("*")
+      .order("created_at", { ascending: order === "asc" });
+
+    if (status !== "all") {
+      query = query.eq("status", status);
+    }
+
+    if (type) {
+      query = query.eq("testimonial_type", String(type));
+    }
+
+    query = query.range(offset, end);
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error("Erreur lecture Supabase:", error);
+      return res.status(500).json({
+        error: "Erreur lors de la récupération des témoignages",
+        details: error.message,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      items: data || [],
+      meta: { limit, offset, order, status, type: type || null },
+    });
+  } catch (err) {
+    console.error("Erreur GET /api/testimonials:", err);
+    return res.status(500).json({
+      error: "Erreur serveur lors de la récupération",
+      details: err.message,
+    });
+  }
+});
+
 // Route pour l'upload de fichiers média
 app.post("/api/upload-media", async (req, res) => {
   try {
