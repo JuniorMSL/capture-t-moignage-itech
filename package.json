@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "node server.js",
     "dev:vercel": "npx vercel dev --listen 3000", 
-    "build": "vercel build",
     "deploy": "vercel --prod",
     "check-env": "node scripts/check-env.js"
   },
