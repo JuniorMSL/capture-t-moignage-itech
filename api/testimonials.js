@@ -1,17 +1,15 @@
 const { createClient } = require("@supabase/supabase-js");
 
-if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-  throw new Error("NEXT_PUBLIC_SUPABASE_URL is not defined");
+function getSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    throw new Error(
+      "Supabase env vars missing (NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY)"
+    );
+  }
+  return createClient(url, key);
 }
-
-if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
-  throw new Error("SUPABASE_SERVICE_ROLE_KEY is not defined");
-}
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
 
 async function handler(req, res) {
   if (req.method === "GET") {
@@ -23,6 +21,7 @@ async function handler(req, res) {
   }
 
   try {
+    const supabase = getSupabase();
     const {
       clientName,
       clientCompany,
@@ -147,6 +146,7 @@ async function handleGet(req, res) {
     const offset = Math.max(parseInt(rawOffset, 10) || 0, 0);
     const end = offset + limit - 1;
 
+    const supabase = getSupabase();
     let query = supabase
       .from("testimonials")
       .select("*")
