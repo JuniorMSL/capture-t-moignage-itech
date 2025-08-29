@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+const { createClient } = require("@supabase/supabase-js");
 
 // Vérification des variables d'environnement
 if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
@@ -14,7 +14,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Méthode non autorisée" });
   }
@@ -88,7 +88,9 @@ export default async function handler(req, res) {
   }
 }
 
-export const config = {
+module.exports = handler;
+
+module.exports.config = {
   api: {
     bodyParser: {
       sizeLimit: "50mb",
