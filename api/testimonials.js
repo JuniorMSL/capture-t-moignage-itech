@@ -201,7 +201,7 @@ module.exports = handler;
 module.exports.config = {
   api: {
     bodyParser: {
-      sizeLimit: "50mb",
+      sizeLimit: "100mb",
     },
   },
 };

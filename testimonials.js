@@ -990,9 +990,18 @@ async function simulateFormSubmission(formData) {
 // Fonction pour uploader les fichiers média vers Supabase
 async function uploadMediaFile(file, type) {
   try {
-    // Convertir le fichier en base64
+    // Convertir le fichier en base64 de manière sûre pour les gros fichiers
     const arrayBuffer = await file.arrayBuffer();
-    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+    const uint8Array = new Uint8Array(arrayBuffer);
+    
+    // Convertir en base64 par chunks pour éviter le stack overflow
+    let binaryString = '';
+    const chunkSize = 8192; // Traiter par chunks de 8KB
+    for (let i = 0; i < uint8Array.length; i += chunkSize) {
+      const chunk = uint8Array.subarray(i, i + chunkSize);
+      binaryString += String.fromCharCode.apply(null, chunk);
+    }
+    const base64 = btoa(binaryString);
     
     // Générer un nom de fichier
     const fileName = `${type}-${Date.now()}.${getFileExtension(file.type)}`;

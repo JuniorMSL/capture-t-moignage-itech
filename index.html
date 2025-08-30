@@ -117,12 +117,14 @@
                 </div>
 
                 <div class="video-frame">
-                  <div class="video-overlay">
-                    <button
-                      class="play-btn"
-                      onclick="this.parentElement.style.display='none'; document.getElementById('testimonials-video').src += '&autoplay=1';"
-                      aria-label="Lire la vidéo"
-                    >
+                  <div
+                    class="video-overlay"
+                    role="button"
+                    tabindex="0"
+                    aria-label="Lire la vidéo"
+                    onclick="(function(el){ el.style.display='none'; var v=document.getElementById('testimonials-video'); if(v){ var sep=v.src.indexOf('?')>-1?'&':'?'; v.src = v.src + sep + 'autoplay=1&playsinline=1'; } })(this)"
+                  >
+                    <button class="play-btn" aria-hidden="true">
                       <i class="bi bi-play-fill"></i>
                     </button>
                   </div>
@@ -131,7 +133,7 @@
                     id="testimonials-video"
                     width="1206"
                     height="678"
-                    src="https://www.youtube.com/embed/_PeAmqpaHjA"
+                    src="https://www.youtube-nocookie.com/embed/_PeAmqpaHjA"
                     title="Message MFINANCES - Témoignages"
                     frameborder="0"
                     loading="lazy"
