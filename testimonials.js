@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeRatingSystem();
   initializeMethodCards();
   initializeFAQ();
+  initializeHeroVideoAutoplay();
   
   // Nouvelles fonctionnalités
   initializeFloatingCTA();
@@ -77,6 +78,47 @@ document.addEventListener("DOMContentLoaded", function () {
     yearElement.textContent = new Date().getFullYear();
   }
 });
+
+// Lecture auto de la vidéo héro (muted pour compatibilité navigateurs)
+function initializeHeroVideoAutoplay() {
+  try {
+    const iframe = document.getElementById("testimonials-video");
+    if (!iframe) return;
+
+    // Enlever le lazy pour démarrer immédiatement
+    if (iframe.hasAttribute("loading")) {
+      iframe.removeAttribute("loading");
+    }
+
+    // Masquer l'overlay si présent
+    const overlay = document.querySelector(".video-overlay");
+    if (overlay) {
+      overlay.style.display = "none";
+    }
+
+    // Préparer l'URL avec autoplay + mute + playsinline
+    let src = iframe.getAttribute("src") || "";
+    // Sécurité: si src est relatif ou invalide, ne pas casser
+    try {
+      const url = new URL(src, window.location.origin);
+      const p = url.searchParams;
+      p.set("autoplay", "1");
+      p.set("mute", "1");
+      p.set("playsinline", "1");
+      // Optionnel: branding réduit / pas de vidéos liées
+      if (!p.has("modestbranding")) p.set("modestbranding", "1");
+      if (!p.has("rel")) p.set("rel", "0");
+      url.search = p.toString();
+      iframe.src = url.toString();
+    } catch (_) {
+      // Fallback au cas où URL() échoue
+      const sep = src.indexOf("?") > -1 ? "&" : "?";
+      iframe.src = src + sep + "autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0";
+    }
+  } catch (e) {
+    console.warn("Autoplay vidéo héro non initialisé:", e);
+  }
+}
 
 // Animations simples CSS
 function initializeSimpleAnimations() {
