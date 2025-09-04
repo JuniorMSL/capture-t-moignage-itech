@@ -2474,7 +2474,7 @@ textarea:focus {
 }
 
 .record-btn {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  background: linear-gradient(135deg, #ffdd57, #e6c64d);
   color: white;
   box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
 }
@@ -2523,7 +2523,7 @@ textarea:focus {
 }
 
 .status-indicator.recording {
-  background: #e74c3c;
+  background: #ffdd57;
   animation: pulse 1.5s infinite;
 }
 
@@ -2816,7 +2816,7 @@ button.choice-btn {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 60, 60, 0.1),
+    rgba(232, 238, 55, 0.1),
     transparent
   );
   transition: left 0.5s ease;
@@ -2828,7 +2828,7 @@ button.choice-btn {
 
 .choice-btn:hover {
   transform: translateY(-6px) scale(1.02);
-  border-color: rgba(255, 60, 60, 0.4);
+  border-color: rgba(255, 229, 60, 0.42);
   box-shadow: var(--shadow-lg);
 }
 
@@ -3086,7 +3086,7 @@ button.choice-btn {
 
 /* Styles pour les éléments requis */
 .required {
-  color: #e74c3c;
+  color: #ffdd57;
   font-weight: 700;
 }
 
@@ -3879,8 +3879,8 @@ button.choice-btn {
   padding: 32px 24px;
   background: linear-gradient(
     135deg,
-    rgba(255, 60, 60, 0.02),
-    rgba(37, 51, 91, 0.02)
+    rgba(255, 190, 60, 0.02),
+    rgba(91, 77, 37, 0.02)
   );
   border-radius: 20px;
   border: 1px solid rgba(37, 51, 91, 0.06);
@@ -3891,7 +3891,7 @@ button.choice-btn {
   transform: translateY(-6px);
   background: linear-gradient(
     135deg,
-    rgba(255, 60, 60, 0.05),
+    rgba(255, 219, 60, 0.05),
     rgba(37, 51, 91, 0.05)
   );
   box-shadow: var(--shadow-md);

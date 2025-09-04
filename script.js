@@ -99,21 +99,21 @@ document.addEventListener("DOMContentLoaded", () => {
     step1.innerHTML = `
       <div class="form-row" style="margin-bottom: 20px;">
         <div class="form-field">
-          <label for="fullName">Nom complet <span style="color:#e74c3c;">*</span></label>
+          <label for="fullName">Nom complet <span style="color:#ffdd57;">*</span></label>
           <input id="fullName" name="fullName" type="text" placeholder="Ex: Marie Dupont" required />
         </div>
         <div class="form-field">
-          <label for="email">Adresse e‑mail <span style="color:#e74c3c;">*</span></label>
+          <label for="email">Adresse e‑mail <span style="color:#ffdd57;">*</span></label>
           <input id="email" name="email" type="email" placeholder="vous@entreprise.com" required />
         </div>
       </div>
       <div class="form-row">
         <div class="form-field">
-          <label for="phone">Téléphone <span style="color:#e74c3c;">*</span></label>
+          <label for="phone">Téléphone <span style="color:#ffdd57;">*</span></label>
           <input id="phone" name="phone" type="tel" inputmode="tel" placeholder="06 12 34 56 78" required />
         </div>
         <div class="form-field">
-          <label for="company">Nom de l'entreprise <span style="color:#e74c3c;">*</span></label>
+          <label for="company">Nom de l'entreprise <span style="color:#ffdd57;">*</span></label>
           <input id="company" name="company" type="text" placeholder="Ex: MSL‑iTECH" required />
         </div>
       </div>
@@ -1121,7 +1121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Erreur lors de l'envoi vers Odoo:", error);
         feedbackEl.innerHTML =
           "❌ <strong>Erreur d'envoi.</strong> Veuillez vérifier votre connexion et réessayer, ou contactez-nous directement à team@msl-itech.com";
-        feedbackEl.style.color = "#e74c3c";
+        feedbackEl.style.color = "#ffdd57";
         feedbackEl.style.background = "rgba(231, 76, 60, 0.1)";
         feedbackEl.style.padding = "16px";
         feedbackEl.style.borderRadius = "12px";

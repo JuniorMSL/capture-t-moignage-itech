@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeMethodCards();
   initializeFAQ();
   initializeHeroVideoAutoplay();
-  
+
   // Nouvelles fonctionnalités
   initializeFloatingCTA();
   initializeMobileOptimizations();
@@ -113,7 +113,8 @@ function initializeHeroVideoAutoplay() {
     } catch (_) {
       // Fallback au cas où URL() échoue
       const sep = src.indexOf("?") > -1 ? "&" : "?";
-      iframe.src = src + sep + "autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0";
+      iframe.src =
+        src + sep + "autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0";
     }
   } catch (e) {
     console.warn("Autoplay vidéo héro non initialisé:", e);
@@ -593,7 +594,7 @@ async function startAudioRecording() {
     mediaRecorder = new MediaRecorder(currentStream, options);
     recordedChunks = [];
     audioRecordedChunks = [];
-    currentRecordingType = 'audio';
+    currentRecordingType = "audio";
 
     mediaRecorder.ondataavailable = (event) => {
       if (event.data.size > 0) {
@@ -669,7 +670,7 @@ async function startVideoRecording() {
     mediaRecorder = new MediaRecorder(currentStream, options);
     recordedChunks = [];
     videoRecordedChunks = [];
-    currentRecordingType = 'video';
+    currentRecordingType = "video";
 
     mediaRecorder.ondataavailable = (event) => {
       if (event.data.size > 0) {
@@ -852,7 +853,7 @@ function updateCharCounter() {
 
   // Changement de couleur selon la limite
   if (count > 450) {
-    elements.charCount.style.color = "#e74c3c";
+    elements.charCount.style.color = "#ffdd57";
   } else if (count > 400) {
     elements.charCount.style.color = "#f39c12";
   } else {
@@ -898,25 +899,25 @@ async function handleFormSubmit(event) {
       resetAudioRecording();
       resetVideoRecording();
       // Reset des inputs file
-      const audioFileInput = document.getElementById('audioFileInput');
-      const videoFileInput = document.getElementById('videoFileInput');
-      const textImageInput = document.getElementById('textImageUpload');
-      const audioImageInput = document.getElementById('audioImageUpload');
-      if (audioFileInput) audioFileInput.value = '';
-      if (videoFileInput) videoFileInput.value = '';
-      if (textImageInput) textImageInput.value = '';
-      if (audioImageInput) audioImageInput.value = '';
-      
+      const audioFileInput = document.getElementById("audioFileInput");
+      const videoFileInput = document.getElementById("videoFileInput");
+      const textImageInput = document.getElementById("textImageUpload");
+      const audioImageInput = document.getElementById("audioImageUpload");
+      if (audioFileInput) audioFileInput.value = "";
+      if (videoFileInput) videoFileInput.value = "";
+      if (textImageInput) textImageInput.value = "";
+      if (audioImageInput) audioImageInput.value = "";
+
       // Reset des preview d'images
-      removeImage('text');
-      removeImage('audio');
-      
+      removeImage("text");
+      removeImage("audio");
+
       feedback.textContent = "";
     }, 3000);
   } catch (error) {
     console.error("Erreur lors de l'envoi:", error);
     feedback.textContent = "❌ Erreur lors de l'envoi. Veuillez réessayer.";
-    feedback.style.color = "#e74c3c";
+    feedback.style.color = "#ffdd57";
   } finally {
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalText;
@@ -938,45 +939,45 @@ async function simulateFormSubmission(formData) {
     let imageFileUrl = null;
 
     // Upload du fichier audio si présent (soit uploadé soit enregistré)
-    const audioFileInput = document.getElementById('audioFileInput');
+    const audioFileInput = document.getElementById("audioFileInput");
     if (audioFileInput && audioFileInput.files.length > 0) {
-      audioFileUrl = await uploadMediaFile(audioFileInput.files[0], 'audio');
+      audioFileUrl = await uploadMediaFile(audioFileInput.files[0], "audio");
     } else if (audioRecordedChunks.length > 0) {
       // Fichier audio enregistré
-      const audioBlob = new Blob(audioRecordedChunks, { type: 'audio/webm' });
-      audioFileUrl = await uploadMediaFile(audioBlob, 'audio');
+      const audioBlob = new Blob(audioRecordedChunks, { type: "audio/webm" });
+      audioFileUrl = await uploadMediaFile(audioBlob, "audio");
     }
 
     // Upload du fichier vidéo si présent (soit uploadé soit enregistré)
-    const videoFileInput = document.getElementById('videoFileInput');
+    const videoFileInput = document.getElementById("videoFileInput");
     if (videoFileInput && videoFileInput.files.length > 0) {
-      videoFileUrl = await uploadMediaFile(videoFileInput.files[0], 'video');
+      videoFileUrl = await uploadMediaFile(videoFileInput.files[0], "video");
     } else if (videoRecordedChunks.length > 0) {
       // Fichier vidéo enregistré
-      const videoBlob = new Blob(videoRecordedChunks, { type: 'video/webm' });
-      videoFileUrl = await uploadMediaFile(videoBlob, 'video');
+      const videoBlob = new Blob(videoRecordedChunks, { type: "video/webm" });
+      videoFileUrl = await uploadMediaFile(videoBlob, "video");
     }
 
     // Upload des images si présentes
-    const textImageInput = document.getElementById('textImageUpload');
+    const textImageInput = document.getElementById("textImageUpload");
     if (textImageInput && textImageInput.files.length > 0) {
-      console.log('Uploading text image:', textImageInput.files[0].type);
-      imageFileUrl = await uploadMediaFile(textImageInput.files[0], 'image');
+      console.log("Uploading text image:", textImageInput.files[0].type);
+      imageFileUrl = await uploadMediaFile(textImageInput.files[0], "image");
     } else {
       // Vérifier aussi l'image pour audio
-      const audioImageInput = document.getElementById('audioImageUpload');
+      const audioImageInput = document.getElementById("audioImageUpload");
       if (audioImageInput && audioImageInput.files.length > 0) {
-        console.log('Uploading audio image:', audioImageInput.files[0].type);
-        imageFileUrl = await uploadMediaFile(audioImageInput.files[0], 'image');
+        console.log("Uploading audio image:", audioImageInput.files[0].type);
+        imageFileUrl = await uploadMediaFile(audioImageInput.files[0], "image");
       }
     }
 
     // Déterminer le type de témoignage
-    let testimonialType = 'text';
+    let testimonialType = "text";
     if (audioFileUrl) {
-      testimonialType = 'audio';
+      testimonialType = "audio";
     } else if (videoFileUrl) {
-      testimonialType = 'video';
+      testimonialType = "video";
     }
 
     // Log pour debug
@@ -984,7 +985,7 @@ async function simulateFormSubmission(formData) {
       audioFileUrl,
       videoFileUrl,
       imageFileUrl,
-      testimonialType
+      testimonialType,
     });
 
     // Préparer les données pour l'API
@@ -997,22 +998,22 @@ async function simulateFormSubmission(formData) {
       testimonialRating: data.testimonialRating,
       audioRating: data.audioRating,
       videoRating: data.videoRating,
-      allowWebsite: data.allowWebsite === 'on',
+      allowWebsite: data.allowWebsite === "on",
       testimonialType: testimonialType,
       audioFileUrl: audioFileUrl,
       videoFileUrl: videoFileUrl,
-      imageFileUrl: imageFileUrl
+      imageFileUrl: imageFileUrl,
     };
 
     console.log("Données envoyées à l'API:", testimonialData);
 
     // Envoyer vers l'API Vercel
-    const response = await fetch('/api/testimonials', {
-      method: 'POST',
+    const response = await fetch("/api/testimonials", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(testimonialData)
+      body: JSON.stringify(testimonialData),
     });
 
     if (!response.ok) {
@@ -1022,7 +1023,6 @@ async function simulateFormSubmission(formData) {
     const result = await response.json();
     console.log("Témoignage envoyé avec succès:", result);
     return result;
-      
   } catch (error) {
     console.error("Erreur lors de l'envoi:", error);
     throw error;
@@ -1035,29 +1035,29 @@ async function uploadMediaFile(file, type) {
     // Convertir le fichier en base64 de manière sûre pour les gros fichiers
     const arrayBuffer = await file.arrayBuffer();
     const uint8Array = new Uint8Array(arrayBuffer);
-    
+
     // Convertir en base64 par chunks pour éviter le stack overflow
-    let binaryString = '';
+    let binaryString = "";
     const chunkSize = 8192; // Traiter par chunks de 8KB
     for (let i = 0; i < uint8Array.length; i += chunkSize) {
       const chunk = uint8Array.subarray(i, i + chunkSize);
       binaryString += String.fromCharCode.apply(null, chunk);
     }
     const base64 = btoa(binaryString);
-    
+
     // Générer un nom de fichier
     const fileName = `${type}-${Date.now()}.${getFileExtension(file.type)}`;
-    
-    const response = await fetch('/api/upload-media', {
-      method: 'POST',
+
+    const response = await fetch("/api/upload-media", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         file: base64,
         fileName: fileName,
-        fileType: file.type
-      })
+        fileType: file.type,
+      }),
     });
 
     if (!response.ok) {
@@ -1066,9 +1066,8 @@ async function uploadMediaFile(file, type) {
 
     const result = await response.json();
     return result.fileUrl;
-    
   } catch (error) {
-    console.error('Erreur upload fichier:', error);
+    console.error("Erreur upload fichier:", error);
     throw error;
   }
 }
@@ -1076,21 +1075,21 @@ async function uploadMediaFile(file, type) {
 // Fonction utilitaire pour obtenir l'extension de fichier
 function getFileExtension(mimeType) {
   const extensions = {
-    'audio/webm': 'webm',
-    'audio/mp3': 'mp3',
-    'audio/wav': 'wav',
-    'audio/m4a': 'm4a',
-    'video/webm': 'webm',
-    'video/mp4': 'mp4',
-    'video/mov': 'mov',
-    'video/avi': 'avi',
-    'image/jpeg': 'jpg',
-    'image/jpg': 'jpg',
-    'image/png': 'png',
-    'image/gif': 'gif',
-    'image/webp': 'webp'
+    "audio/webm": "webm",
+    "audio/mp3": "mp3",
+    "audio/wav": "wav",
+    "audio/m4a": "m4a",
+    "video/webm": "webm",
+    "video/mp4": "mp4",
+    "video/mov": "mov",
+    "video/avi": "avi",
+    "image/jpeg": "jpg",
+    "image/jpg": "jpg",
+    "image/png": "png",
+    "image/gif": "gif",
+    "image/webp": "webp",
   };
-  return extensions[mimeType] || 'bin';
+  return extensions[mimeType] || "bin";
 }
 
 // Affichage d'erreurs
@@ -1163,9 +1162,9 @@ function initializeFloatingCTA() {
   const floatingCTA = document.getElementById("floatingCTA");
   const closeCTA = document.getElementById("closeCTA");
   const quickTestimonial = document.getElementById("quickTestimonial");
-  
+
   if (!floatingCTA) return;
-  
+
   // Gestionnaire pour fermer le CTA
   if (closeCTA) {
     closeCTA.addEventListener("click", () => {
@@ -1175,7 +1174,7 @@ function initializeFloatingCTA() {
       localStorage.setItem("ctaDismissed", "true");
     });
   }
-  
+
   // Gestionnaire pour le bouton témoigner
   if (quickTestimonial) {
     quickTestimonial.addEventListener("click", () => {
@@ -1184,12 +1183,12 @@ function initializeFloatingCTA() {
       hasTestified = true;
     });
   }
-  
+
   // Vérifier si le CTA a été fermé précédemment
   if (localStorage.getItem("ctaDismissed") === "true") {
     ctaDismissed = true;
   }
-  
+
   // Initialiser le scroll listener
   initializeScrollDetection();
 }
@@ -1197,38 +1196,38 @@ function initializeFloatingCTA() {
 // Fonction pour détecter le scroll et afficher le CTA
 function initializeScrollDetection() {
   let scrollTimeout;
-  
+
   function handleScroll() {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       checkScrollPosition();
     }, 100);
   }
-  
+
   function checkScrollPosition() {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
     const scrollPercent = (scrollPosition + windowHeight) / documentHeight;
-    
+
     // Afficher le CTA après 40% de scroll ou après 15 secondes
-    const shouldShowCTA = (scrollPercent > 0.4 || getTimeOnPage() > 15000);
-    
+    const shouldShowCTA = scrollPercent > 0.4 || getTimeOnPage() > 15000;
+
     if (shouldShowCTA && !hasTestified && !ctaShown && !ctaDismissed) {
       showFloatingCTA();
     }
   }
-  
+
   // Ajouter le listener de scroll
   window.addEventListener("scroll", handleScroll, { passive: true });
-  
+
   // Timer de fallback après 20 secondes
   setTimeout(() => {
     if (!hasTestified && !ctaShown && !ctaDismissed) {
       showFloatingCTA();
     }
   }, 20000);
-  
+
   // Debug temporaire - force après 3 secondes
   setTimeout(() => {
     console.log("Force CTA pour debug");
@@ -1248,31 +1247,35 @@ function showFloatingCTA() {
   console.log("floatingCTA element:", floatingCTA);
   console.log("ctaShown:", ctaShown);
   if (!floatingCTA || ctaShown) return;
-  
+
   // Détecter si mobile ou desktop
-  const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  
+  const isMobile =
+    window.innerWidth <= 768 ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+
   // Afficher les bons boutons selon le device
-  const desktopButtons = floatingCTA.querySelector('.desktop-buttons');
-  const mobileButtons = floatingCTA.querySelector('.mobile-buttons');
-  
+  const desktopButtons = floatingCTA.querySelector(".desktop-buttons");
+  const mobileButtons = floatingCTA.querySelector(".mobile-buttons");
+
   if (isMobile) {
-    if (desktopButtons) desktopButtons.style.display = 'none';
-    if (mobileButtons) mobileButtons.style.display = 'block';
+    if (desktopButtons) desktopButtons.style.display = "none";
+    if (mobileButtons) mobileButtons.style.display = "block";
   } else {
-    if (desktopButtons) desktopButtons.style.display = 'block';
-    if (mobileButtons) mobileButtons.style.display = 'none';
+    if (desktopButtons) desktopButtons.style.display = "block";
+    if (mobileButtons) mobileButtons.style.display = "none";
   }
-  
+
   floatingCTA.style.display = "block";
   ctaShown = true;
-  
+
   // Animation d'entrée
   setTimeout(() => {
     floatingCTA.style.opacity = "1";
     floatingCTA.style.transform = "translateX(0)";
   }, 100);
-  
+
   // Auto-hide après 30 secondes si pas d'interaction
   setTimeout(() => {
     if (ctaShown && !hasTestified) {
@@ -1285,10 +1288,10 @@ function showFloatingCTA() {
 function hideFloatingCTA() {
   const floatingCTA = document.getElementById("floatingCTA");
   if (!floatingCTA) return;
-  
+
   floatingCTA.style.opacity = "0";
   floatingCTA.style.transform = "translateX(100%)";
-  
+
   setTimeout(() => {
     floatingCTA.style.display = "none";
     ctaShown = false;
@@ -1303,18 +1306,18 @@ function hideFloatingCTA() {
 function initializeMobileOptimizations() {
   // Détection mobile
   const isMobile = window.innerWidth <= 768;
-  
+
   if (isMobile) {
     // Optimisation du CTA pour mobile
     adjustCTAForMobile();
-    
+
     // Optimisation des formulaires pour mobile
     optimizeFormsForMobile();
-    
+
     // Optimisation de la navigation pour mobile
     optimizeNavigationForMobile();
   }
-  
+
   // Listener pour les changements d'orientation
   window.addEventListener("orientationchange", () => {
     setTimeout(() => {
@@ -1339,10 +1342,10 @@ function adjustCTAForMobile() {
 // Optimisation des formulaires pour mobile
 function optimizeFormsForMobile() {
   const forms = document.querySelectorAll("form");
-  forms.forEach(form => {
+  forms.forEach((form) => {
     // Ajuster les inputs pour mobile
     const inputs = form.querySelectorAll("input, textarea, select");
-    inputs.forEach(input => {
+    inputs.forEach((input) => {
       input.addEventListener("focus", () => {
         // Scroll pour éviter que le clavier cache l'input
         setTimeout(() => {
@@ -1356,17 +1359,18 @@ function optimizeFormsForMobile() {
 // Optimisation de la navigation pour mobile
 function optimizeNavigationForMobile() {
   // Améliorer le scroll smooth sur mobile
-  document.querySelectorAll("a[href^='#']").forEach(anchor => {
+  document.querySelectorAll("a[href^='#']").forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute("href"));
       if (target) {
         const offset = 80; // Offset pour la header sticky
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-        
+        const targetPosition =
+          target.getBoundingClientRect().top + window.pageYOffset - offset;
+
         window.scrollTo({
           top: targetPosition,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
     });
@@ -1380,10 +1384,10 @@ function optimizeNavigationForMobile() {
 // Fonction pour initialiser les uploads d'image
 function initializeImageUploads() {
   // Image upload pour témoignage texte
-  initializeImageUpload('text');
-  
+  initializeImageUpload("text");
+
   // Image upload pour témoignage audio
-  initializeImageUpload('audio');
+  initializeImageUpload("audio");
 }
 
 // Fonction générique pour initialiser l'upload d'image
@@ -1393,48 +1397,50 @@ function initializeImageUpload(type) {
   const uploadedImage = document.getElementById(`${type}UploadedImage`);
   const imagePreview = document.getElementById(`${type}ImagePreview`);
   const fileName = document.getElementById(`${type}ImageFileName`);
-  const removeBtn = document.getElementById(`remove${type.charAt(0).toUpperCase() + type.slice(1)}ImageBtn`);
-  
+  const removeBtn = document.getElementById(
+    `remove${type.charAt(0).toUpperCase() + type.slice(1)}ImageBtn`
+  );
+
   if (!fileInput || !uploadZone) return;
-  
+
   // Gestion du drag & drop
-  uploadZone.addEventListener('dragover', (e) => {
+  uploadZone.addEventListener("dragover", (e) => {
     e.preventDefault();
-    uploadZone.classList.add('drag-over');
+    uploadZone.classList.add("drag-over");
   });
-  
-  uploadZone.addEventListener('dragleave', () => {
-    uploadZone.classList.remove('drag-over');
+
+  uploadZone.addEventListener("dragleave", () => {
+    uploadZone.classList.remove("drag-over");
   });
-  
-  uploadZone.addEventListener('drop', (e) => {
+
+  uploadZone.addEventListener("drop", (e) => {
     e.preventDefault();
-    uploadZone.classList.remove('drag-over');
-    
+    uploadZone.classList.remove("drag-over");
+
     const files = e.dataTransfer.files;
     if (files.length > 0) {
       handleImageFile(files[0], type);
     }
   });
-  
+
   // Gestion du clic sur la zone
-  uploadZone.addEventListener('click', () => {
+  uploadZone.addEventListener("click", () => {
     // Permettre de re-sélectionner le même fichier
-    fileInput.value = '';
+    fileInput.value = "";
     fileInput.click();
   });
-  
+
   // Gestion de la sélection de fichier
-  fileInput.addEventListener('change', (e) => {
+  fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
     if (file) {
       handleImageFile(file, type);
     }
   });
-  
+
   // Gestion du bouton supprimer
   if (removeBtn) {
-    removeBtn.addEventListener('click', () => {
+    removeBtn.addEventListener("click", () => {
       removeImage(type);
     });
   }
@@ -1443,19 +1449,22 @@ function initializeImageUpload(type) {
 // Fonction pour traiter le fichier image
 function handleImageFile(file, type) {
   // Validation du fichier
-  const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+  const validTypes = ["image/jpeg", "image/png", "image/jpg"];
   const maxSize = 5 * 1024 * 1024; // 5MB
-  
+
   if (!validTypes.includes(file.type)) {
-    showImageError('Format non supporté. Veuillez choisir une image JPG ou PNG.', type);
+    showImageError(
+      "Format non supporté. Veuillez choisir une image JPG ou PNG.",
+      type
+    );
     return;
   }
-  
+
   if (file.size > maxSize) {
-    showImageError('Fichier trop volumineux. Taille maximum : 5MB.', type);
+    showImageError("Fichier trop volumineux. Taille maximum : 5MB.", type);
     return;
   }
-  
+
   // Créer un aperçu de l'image
   const reader = new FileReader();
   reader.onload = (e) => {
@@ -1470,23 +1479,23 @@ function displayImagePreview(src, name, type) {
   const uploadedImage = document.getElementById(`${type}UploadedImage`);
   const imagePreview = document.getElementById(`${type}ImagePreview`);
   const fileName = document.getElementById(`${type}ImageFileName`);
-  
+
   if (uploadZone && uploadedImage && imagePreview && fileName) {
     // Masquer la zone d'upload et afficher l'aperçu
-    uploadZone.style.display = 'none';
-    uploadedImage.style.display = 'block';
-    
+    uploadZone.style.display = "none";
+    uploadedImage.style.display = "block";
+
     // Mettre à jour l'aperçu
     imagePreview.src = src;
     fileName.textContent = name;
-    
+
     // Animation d'apparition
-    uploadedImage.style.opacity = '0';
-    uploadedImage.style.transform = 'translateY(20px)';
+    uploadedImage.style.opacity = "0";
+    uploadedImage.style.transform = "translateY(20px)";
     setTimeout(() => {
-      uploadedImage.style.transition = 'all 0.3s ease';
-      uploadedImage.style.opacity = '1';
-      uploadedImage.style.transform = 'translateY(0)';
+      uploadedImage.style.transition = "all 0.3s ease";
+      uploadedImage.style.opacity = "1";
+      uploadedImage.style.transform = "translateY(0)";
     }, 100);
   }
 }
@@ -1497,27 +1506,27 @@ function removeImage(type) {
   const uploadZone = document.getElementById(`${type}ImageUploadZone`);
   const uploadedImage = document.getElementById(`${type}UploadedImage`);
   const imagePreview = document.getElementById(`${type}ImagePreview`);
-  
+
   if (fileInput && uploadZone && uploadedImage && imagePreview) {
     // Réinitialiser le input
-    fileInput.value = '';
-    
+    fileInput.value = "";
+
     // Animation de disparition puis affichage de la zone d'upload
-    uploadedImage.style.opacity = '0';
-    uploadedImage.style.transform = 'translateY(-20px)';
-    
+    uploadedImage.style.opacity = "0";
+    uploadedImage.style.transform = "translateY(-20px)";
+
     setTimeout(() => {
-      uploadedImage.style.display = 'none';
-      uploadZone.style.display = 'block';
-      imagePreview.src = '';
-      
+      uploadedImage.style.display = "none";
+      uploadZone.style.display = "block";
+      imagePreview.src = "";
+
       // Animation d'apparition de la zone d'upload
-      uploadZone.style.opacity = '0';
-      uploadZone.style.transform = 'translateY(20px)';
+      uploadZone.style.opacity = "0";
+      uploadZone.style.transform = "translateY(20px)";
       setTimeout(() => {
-        uploadZone.style.transition = 'all 0.3s ease';
-        uploadZone.style.opacity = '1';
-        uploadZone.style.transform = 'translateY(0)';
+        uploadZone.style.transition = "all 0.3s ease";
+        uploadZone.style.opacity = "1";
+        uploadZone.style.transform = "translateY(0)";
       }, 50);
     }, 300);
   }
@@ -1527,21 +1536,21 @@ function removeImage(type) {
 function showImageError(message, type) {
   const uploadZone = document.getElementById(`${type}ImageUploadZone`);
   if (!uploadZone) return;
-  
+
   // Créer ou récupérer l'élément d'erreur
-  let errorElement = uploadZone.querySelector('.upload-error');
+  let errorElement = uploadZone.querySelector(".upload-error");
   if (!errorElement) {
-    errorElement = document.createElement('div');
-    errorElement.className = 'upload-error';
+    errorElement = document.createElement("div");
+    errorElement.className = "upload-error";
     uploadZone.appendChild(errorElement);
   }
-  
+
   errorElement.textContent = message;
-  errorElement.style.display = 'block';
-  
+  errorElement.style.display = "block";
+
   // Masquer l'erreur après 5 secondes
   setTimeout(() => {
-    errorElement.style.display = 'none';
+    errorElement.style.display = "none";
   }, 5000);
 }
 
